@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --ink: #1c1d1f; --body: #3c3e43; --muted: #6f7277; --meta: #8b8e94; --faint: #c4c6cc;
+    --ink: #1c1d1f; --body: #3c3e43; --muted: #6f7277; --meta: #6e7177; --faint: #9a9da3;
     --line: #ececee; --line-2: #e6e7ea; --chip: #f1f1f3;
     --violet: #6d5dfb; --violet-ink: #5644e6;
     --grad: linear-gradient(90deg, #2563eb 0%, #6d5dfb 52%, #9333ea 100%);
@@ -57,13 +57,13 @@
   .s1 { position: relative; height: 540px; border-radius: 26px; overflow: hidden; background: #0b0b0c; color: #fff; }
   .s1 canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
   .s1 .hd { position: absolute; left: 28px; right: 28px; top: 26px; display: flex; justify-content: space-between; }
-  .s1 .hd .k { color: #6f7277; }
+  .s1 .hd .k { color: #8b8e94; }
   .s1 .hd .cnt { font: 500 11.5px var(--mono); color: #c4b5fd; letter-spacing: .06em; }
   .tag { position: absolute; display: flex; align-items: center; gap: 9px; padding: 8px 12px 8px 8px; border-radius: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(10px); font-size: 13px; color: #e6e7ea; white-space: nowrap; opacity: 0; transform: translateY(8px); transition: opacity .9s, transform .9s cubic-bezier(.16,1,.3,1); }
   .tag.on { opacity: 1; transform: none; }
   .tag em { font-style: normal; font-size: 13.5px; font-weight: 600; letter-spacing: -.02em; color: #fff; margin-left: 6px; padding-left: 9px; border-left: 1px solid rgba(255,255,255,.18); }
   .s1 .ft { position: absolute; left: 28px; right: 28px; bottom: 26px; display: flex; justify-content: space-between; align-items: center; }
-  .s1 .ft span { font: 400 12.5px var(--mono); color: #6f7277; }
+  .s1 .ft span { font: 400 12.5px var(--mono); color: #8b8e94; }
 
   /* ═══ 2 · Stack — white, a 3D stack of roles, the top one is applied and slides off */
   .s2 { position: relative; height: 540px; border-radius: 26px; background: linear-gradient(180deg, #fbfbfc, #f3f3f6); border: 1px solid var(--line); overflow: hidden; }
@@ -74,7 +74,7 @@
   .card { position: absolute; inset: 0; border-radius: 18px; padding: 20px; background: #fff; border: 1px solid var(--line); box-shadow: 0 30px 60px -36px rgba(30,30,80,.45); display: flex; flex-direction: column; justify-content: space-between; transition: transform .8s cubic-bezier(.65,0,.35,1), opacity .8s; }
   .card .row { display: flex; justify-content: space-between; align-items: center; }
   .card .co { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
-  .card h4 { margin: 0; font-size: 22px; line-height: 1.12; letter-spacing: -.03em; font-weight: 600; }
+  .card .h4 { margin: 0; font-size: 22px; line-height: 1.12; letter-spacing: -.03em; font-weight: 600; }
   .card .m { font: 500 12px var(--mono); color: var(--muted); }
   .card .m b { color: var(--ink); font: 600 17px Inter, sans-serif; letter-spacing: -.02em; }
   .card .st { font: 500 11.5px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
@@ -111,10 +111,10 @@
   .s6 { position: relative; height: 540px; border-radius: 26px; overflow: hidden; background: radial-gradient(60% 60% at 50% 48%, #1b1640, #0b0b0c 70%); color: #fff; }
   .s6 canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
   .s6 .hd { position: absolute; left: 28px; right: 28px; top: 26px; display: flex; justify-content: space-between; }
-  .s6 .hd .k { color: #6f7277; } .s6 .hd .cnt { font: 500 11.5px var(--mono); color: #c4b5fd; }
+  .s6 .hd .k { color: #8b8e94; } .s6 .hd .cnt { font: 500 11.5px var(--mono); color: #c4b5fd; }
   .s6 .core { position: absolute; left: 50%; top: 47%; width: 64px; height: 64px; translate: -50% -50%; display: grid; place-items: center; border-radius: 18px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(8px); box-shadow: 0 0 50px rgba(109,93,251,.5); }
   .s6 .ft { position: absolute; left: 28px; right: 28px; bottom: 26px; display: flex; justify-content: space-between; align-items: center; }
-  .s6 .ft span { font: 400 12.5px var(--mono); color: #6f7277; }
+  .s6 .ft span { font: 400 12.5px var(--mono); color: #8b8e94; }
   .offer { position: absolute; z-index: 2; display: flex; align-items: center; gap: 11px; padding: 10px 14px 10px 10px; border-radius: 14px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(12px); box-shadow: 0 20px 40px -20px rgba(0,0,0,.6); opacity: 0; transform: translateY(8px) scale(.97); transition: opacity .8s, transform .8s cubic-bezier(.16,1,.3,1); }
   .offer.on { opacity: 1; transform: none; }
   .offer .logo { width: 30px; height: 30px; border-radius: 9px; }
@@ -165,7 +165,7 @@
 <section class="hero"><div class="frame">
   <div><span class="pill"><svg width="13" height="13"><use href="#tau" /></svg> Blog · Resume</span><h1>How to write a resume recruiters <span class="grad-text">actually read</span>.</h1><p class="lead">A recruiter decides in a few seconds. Here’s what their eyes hit first.</p><div class="meta"><span>Tau team</span><span>·</span><span>6 min read</span></div></div>
   <aside class="s2">
-    <div class="hd"><span class="k">Your agent</span><img src="icons/glass/apply.webp" alt="" /></div>
+    <div class="hd"><span class="k">Your agent</span><img loading="lazy" decoding="async" width="240" height="240" src="icons/glass/sm/apply.webp" alt="" /></div>
     <div class="deck" data-deck></div>
     <div class="ft"><span data-c2>17 applied today</span><a class="lnk" href="onboarding/">Launch my agent <span class="ar">→</span></a></div>
   </aside>
@@ -223,7 +223,7 @@
     };
     if (reduce) { draw(0); tags.forEach((t) => t.classList.add("on")); cnt.textContent = "3 matches"; }
     else {
-      const loop = (ms) => { draw(ms); requestAnimationFrame(loop); }; requestAnimationFrame(loop);
+      let on = false; new IntersectionObserver(([e]) => (on = e.isIntersecting)).observe(S1); const loop = (ms) => { if (on) draw(ms); requestAnimationFrame(loop); }; requestAnimationFrame(loop);
       (async () => { for (;;) { for (let i = 0; i < tags.length; i++) { await sleep(1400); tags[i].classList.add("on"); cnt.textContent = `${i + 1} match${i ? "es" : ""}`; } await sleep(3200); tags.forEach((t) => t.classList.remove("on")); cnt.textContent = "0 matches"; await sleep(900); } })();
     }
   }
@@ -233,8 +233,8 @@
   if (deck) {
     const J = [["#635BFF", "Stripe", "Product Designer", "Berlin", "€185k"], ["#1ED760", "Spotify", "Senior Product Designer", "Remote", "€170k"], ["#5E6AD2", "Linear", "Design Engineer", "EU", "€210k"], ["#FF5A5F", "Airbnb", "Product Designer", "Remote", "€180k"], ["#F24E1E", "Figma", "Product Designer, Editor", "London", "£165k"]];
     let k = 0, applied = 17; const c2 = document.querySelector("[data-c2]");
-    const make = () => { const [bg, co, t, loc, m] = J[k++ % J.length]; const el = document.createElement("div"); el.className = "card"; el.innerHTML = `<div class="row"><span class="co"><span class="logo" style="background:${bg}"><svg><use href="#lg-${co}" /></svg></span>${co} · ${loc}</span><span class="st">Queued</span></div><h4>${t}</h4><div><div class="row" style="margin-bottom:10px"><span class="m">salary <b>${m}</b> / year</span></div><div class="bar"><i></i></div></div>`; return el; };
-    const lay = () => [...deck.children].forEach((el, i) => { el.style.transform = `translateY(${-i * 16}px) scale(${1 - i * .06})`; el.style.opacity = i > 2 ? 0 : 1; el.style.filter = i ? `brightness(${1 - i * .04})` : 'none'; el.querySelector('h4').style.opacity = el.querySelector('.co').style.opacity = i ? 0 : 1; el.style.zIndex = 10 - i; el.classList.toggle("top", i === 0); if (i === 0 && !el.classList.contains("done")) el.querySelector(".st").textContent = "Tailoring CV"; });
+    const make = () => { const [bg, co, t, loc, m] = J[k++ % J.length]; const el = document.createElement("div"); el.className = "card"; el.innerHTML = `<div class="row"><span class="co"><span class="logo" style="background:${bg}"><svg><use href="#lg-${co}" /></svg></span>${co} · ${loc}</span><span class="st">Queued</span></div><p class="h4">${t}</p><div><div class="row" style="margin-bottom:10px"><span class="m">salary <b>${m}</b> / year</span></div><div class="bar"><i></i></div></div>`; return el; };
+    const lay = () => [...deck.children].forEach((el, i) => { el.style.transform = `translateY(${-i * 16}px) scale(${1 - i * .06})`; el.style.opacity = i > 2 ? 0 : 1; el.style.filter = i ? `brightness(${1 - i * .04})` : 'none'; el.querySelector('.h4').style.opacity = el.querySelector('.co').style.opacity = i ? 0 : 1; el.style.zIndex = 10 - i; el.classList.toggle("top", i === 0); if (i === 0 && !el.classList.contains("done")) el.querySelector(".st").textContent = "Tailoring CV"; });
     for (let i = 0; i < 4; i++) deck.appendChild(make()); lay();
     if (!reduce) (async () => { for (;;) {
       await sleep(1800); const top = deck.firstElementChild; top.classList.add("done"); top.querySelector(".st").textContent = "✓ Applied"; c2.textContent = `${++applied > 20 ? (applied = 18) : applied} applied today`;
@@ -281,7 +281,7 @@
         const gr = g.createLinearGradient(cx, cy, tx, ty); gr.addColorStop(0, "rgba(196,181,253,.0)"); gr.addColorStop(1, `rgba(196,181,253,${.55 * age})`); g.strokeStyle = gr; g.lineWidth = 1; g.setLineDash([3, 4]); g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + (tx - cx) * age, cy + (ty - cy) * age); g.stroke(); g.setLineDash([]); }
     };
     if (reduce) { offers.forEach((o) => o.classList.add("on")); c6.textContent = offers.length; draw(0); }
-    else { const loop = (ms) => { draw(ms); requestAnimationFrame(loop); }; requestAnimationFrame(loop);
+    else { let on = false; new IntersectionObserver(([e]) => (on = e.isIntersecting)).observe(S6); const loop = (ms) => { if (on) draw(ms); requestAnimationFrame(loop); }; requestAnimationFrame(loop);
       setInterval(() => { const outer = nodes.filter((n) => n.ring === 2); pulses.push({ n: outer[(Math.random() * outer.length) | 0], t0: performance.now() }); }, 700);
       // offers land one by one, then the loop starts over
       (async () => { for (;;) { for (const o of offers) { await sleep(1700); o.classList.add("on"); link = o; link.t0 = performance.now(); c6.textContent = ++found; } await sleep(3200); offers.forEach((o) => o.classList.remove("on")); link = null; found = 0; c6.textContent = 0; await sleep(900); } })(); }

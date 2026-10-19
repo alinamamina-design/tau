@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --ink: #1c1d1f; --body: #3c3e43; --muted: #6f7277; --meta: #8b8e94; --faint: #c4c6cc;
+    --ink: #1c1d1f; --body: #3c3e43; --muted: #6f7277; --meta: #6e7177; --faint: #9a9da3;
     --line: #ececee; --line-2: #e6e7ea; --panel: #f7f7f8; --chip: #f1f1f3;
     --violet: #6d5dfb; --violet-ink: #5644e6; --violet-bg: #f1efff;
     --green: #1a7f3c; --green-dot: #22a35a; --green-bg: #e7f6ec;
@@ -57,10 +57,10 @@
   .mhero .meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 24px; font-size: 14px; color: var(--meta); font-weight: 500; }
   .mhero .runs { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); max-width: 560px; }
   .mhero .runs small { display: block; font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--meta); }
-  .mhero .runs div { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; font-size: 16px; font-weight: 600; color: #9a9da3; letter-spacing: -.02em; }
+  .mhero .runs div { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; font-size: 16px; font-weight: 600; color: #6e7177; letter-spacing: -.02em; }
   /* hero card: the Ink card — a quiet line and the agent's log, new roles keep arriving */
   .x2 { position: relative; overflow: hidden; border-radius: 26px; padding: 40px; background: #0e0e0f; color: #fff; min-height: 520px; display: flex; flex-direction: column; }
-  .x2 .k { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #6f7277; }
+  .x2 .k { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #8b8e94; }
   .x2 h2 { margin: 24px 0 0; font-size: 40px; line-height: 1.04; letter-spacing: -.045em; font-weight: 500; }
   .x2 h2 em { font-style: normal; color: #8b8e94; }
   /* the log is a fixed window (5 rows) — rows ride up like a conveyor, so the card never changes height */
@@ -72,7 +72,7 @@
   .x2 .row i { width: 6px; height: 6px; border-radius: 50%; background: var(--green-dot); flex: none; }
   .x2 .row .st { min-width: 74px; }
   .x2 .row .nm { overflow: hidden; text-overflow: ellipsis; }
-  .x2 .row em { font-style: normal; color: #6f7277; margin-left: auto; }
+  .x2 .row em { font-style: normal; color: #8b8e94; margin-left: auto; }
   .x2 .row.work i { background: #a78bfa; box-shadow: 0 0 0 0 rgba(167,139,250,.5); animation: halo 1s ease-out infinite; }
   .x2 .row.work .st { color: #a78bfa; }
   .x2 .row.work .st::after { content: ""; display: inline-block; width: 1.4em; text-align: left; animation: dots 1s steps(4) infinite; }
@@ -149,7 +149,7 @@
   .score div b { display: block; font: 600 17px Inter, sans-serif; color: var(--ink); }
   .score .tot { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--green-bg); color: var(--green); font: 600 13px Inter, sans-serif; }
   .kw { border-radius: 4px; padding: 0 3px; background: var(--violet-bg); color: var(--violet-ink); font-weight: 600; }
-  .tile.tau { color: #fff; background: var(--grad-d); }
+  .tile.tau { color: #fff; background: var(--grad-d); overflow: hidden; }
   .tile.tau .n { color: rgba(255,255,255,.7); }
   .tile.tau p { color: rgba(255,255,255,.82); }
   /* the rocket: a launch loop — rumbles with exhaust puffs, blasts off to the top-right with speed
@@ -208,7 +208,7 @@
   .steps b { display: block; font-size: 16.5px; letter-spacing: -.015em; }
   .steps span { color: var(--muted); font-size: 15px; }
   .code { border-radius: 16px; background: #0e0e10; color: #e6e7ea; font: 400 14px/1.7 var(--mono); padding: 18px 20px; }
-  .code .p { color: #a5b4fc; } .code .c { color: #6f7277; }
+  .code .p { color: #a5b4fc; } .code .c { color: #8b8e94; }
   .note-box { margin-top: 16px; padding: 16px 18px; border-radius: 14px; background: var(--violet-bg); color: var(--ink); font-size: 15px; }
   .note-box b { color: var(--violet-ink); font: 600 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
 
@@ -217,8 +217,8 @@
   .endcta .frame { position: relative; overflow: hidden; text-align: center; background: radial-gradient(46% 62% at 50% 100%, rgba(247,170,92,.95) 0%, rgba(247,178,107,.6) 42%, rgba(247,178,107,0) 72%), radial-gradient(70% 80% at 50% 100%, rgba(120,170,255,.85) 0%, rgba(150,190,255,.6) 45%, rgba(200,222,255,.25) 70%, rgba(220,234,255,0) 88%), #fff; }
   .endcta .copy { position: relative; z-index: 2; padding: 128px 24px 0; }
   .endcta h2 { margin: 0 auto; max-width: 760px; font-size: clamp(2.2rem, 5vw, 3.75rem); line-height: 1.02; letter-spacing: -.04em; font-weight: 600; text-wrap: balance; }
-  .endcta .grey2 { color: #6f7277; }
-  .endcta .small { margin: 24px 0 0; font-size: 14px; font-weight: 500; color: #6f7277; }
+  .endcta .grey2 { color: #8b8e94; }
+  .endcta .small { margin: 24px 0 0; font-size: 14px; font-weight: 500; color: #8b8e94; }
   .endcta .rays { position: relative; height: clamp(320px, 38vw, 540px); margin-top: 64px; }
   .endcta canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
   .endfoot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; display: flex; justify-content: flex-start; padding: 28px 32px; font-size: 13px; font-weight: 500; color: rgba(28,29,31,.7); }
@@ -307,13 +307,13 @@
   <h2>One job search, seven skills. <span>From finding the role to tracking the reply.</span></h2>
   <div class="track">
     <i class="runner" aria-hidden="true"></i>
-    <div class="node"><img src="icons/glass/compass.webp" alt="" /><b>Scan</b><code>/tau scan</code></div>
-    <div class="node"><img src="icons/glass/target.webp" alt="" /><b>Score</b><code>/tau score</code></div>
-    <div class="node"><img src="icons/glass/paper.webp" alt="" /><b>CV</b><code>/tau cv</code></div>
-    <div class="node"><img src="icons/glass/book.webp" alt="" /><b>Cover</b><code>/tau cover</code></div>
-    <div class="node"><img src="icons/glass/megaphone.webp" alt="" /><b>Reach</b><code>/tau reach</code></div>
-    <div class="node"><img src="icons/glass/pencil.webp" alt="" /><b>Apply</b><code>/tau apply</code></div>
-    <div class="node"><img src="icons/glass/clock.webp" alt="" /><b>Track</b><code>/tau track</code></div>
+    <div class="node"><img loading="lazy" decoding="async" width="240" height="240" src="icons/glass/sm/compass.webp" alt="" /><b>Scan</b><code>/tau scan</code></div>
+    <div class="node"><img loading="lazy" decoding="async" width="240" height="240" src="icons/glass/sm/target.webp" alt="" /><b>Score</b><code>/tau score</code></div>
+    <div class="node"><img loading="lazy" decoding="async" width="240" height="240" src="icons/glass/sm/paper.webp" alt="" /><b>CV</b><code>/tau cv</code></div>
+    <div class="node"><img loading="lazy" decoding="async" width="240" height="240" src="icons/glass/sm/book.webp" alt="" /><b>Cover</b><code>/tau cover</code></div>
+    <div class="node"><img loading="lazy" decoding="async" width="240" height="240" src="icons/glass/sm/megaphone.webp" alt="" /><b>Reach</b><code>/tau reach</code></div>
+    <div class="node"><img loading="lazy" decoding="async" width="240" height="240" src="icons/glass/sm/pencil.webp" alt="" /><b>Apply</b><code>/tau apply</code></div>
+    <div class="node"><img loading="lazy" decoding="async" width="240" height="240" src="icons/glass/sm/clock.webp" alt="" /><b>Track</b><code>/tau track</code></div>
   </div>
   <div class="gets">
     <div><span class="n">[ 7 ]</span><b>skills, one per step</b><p>Run any of them on its own, or the whole loop in order.</p></div>
@@ -342,16 +342,16 @@
     <div class="vis"><div class="ui"><div class="bar"><i></i><i></i><i></i>cover-letter.md</div><div class="bd" style="font-family:Inter,sans-serif;font-size:13px">“Your payments onboarding is the smoothest I’ve used — at Fernway I lifted activation by 18%…”</div></div></div>
     <h3>Cover letter</h3><p>Mirrors the job’s keywords. <code>/tau cover</code></p></div>
   <div class="tile"><span class="n">[05]</span>
-    <div class="vis"><div class="ui"><div class="bd" style="font-family:Inter,sans-serif;font-size:13px;display:flex;gap:10px;align-items:center"><img src="hero/dana-280.webp" alt="" style="width:36px;height:36px;border-radius:50%;object-fit:cover" /><span><b>Dana Kim</b> · Head of Design<br /><span style="color:#8b8e94">“Hi Dana — saw you’re growing the team…”</span></span></div></div></div>
+    <div class="vis"><div class="ui"><div class="bd" style="font-family:Inter,sans-serif;font-size:13px;display:flex;gap:10px;align-items:center"><img width="280" height="280" loading="lazy" decoding="async" src="hero/dana-280.webp" alt="" style="width:36px;height:36px;border-radius:50%;object-fit:cover" /><span><b>Dana Kim</b> · Head of Design<br /><span style="color:#6e7177">“Hi Dana — saw you’re growing the team…”</span></span></div></div></div>
     <h3>Reach out</h3><p>Finds the person hiring, drafts the note. <code>/tau reach</code></p></div>
   <div class="tile"><span class="n">[06]</span>
-    <div class="vis"><div class="ui"><div class="bar"><i></i><i></i><i></i>greenhouse · application</div><div class="bd" style="font-family:Inter,sans-serif;font-size:13px"><span style="color:#8b8e94">Why do you want to join?</span><br />I’ve built payments design systems for two fintechs and…</div></div></div>
+    <div class="vis"><div class="ui"><div class="bar"><i></i><i></i><i></i>greenhouse · application</div><div class="bd" style="font-family:Inter,sans-serif;font-size:13px"><span style="color:#6e7177">Why do you want to join?</span><br />I’ve built payments design systems for two fintechs and…</div></div></div>
     <h3>Apply forms</h3><p>Drafted answers to paste. <code>/tau apply</code></p></div>
   <div class="tile"><span class="n">[07]</span>
-    <div class="vis"><div class="ui"><div class="bd" style="font-family:Inter,sans-serif;font-size:13px;display:grid;gap:8px"><span style="display:flex;justify-content:space-between"><b>Stripe</b><span class="pill2 p-a" style="display:inline-flex">Interview</span></span><span style="display:flex;justify-content:space-between"><b>Linear</b><span class="pill2 p-t" style="display:inline-flex">Applied</span></span><span style="display:flex;justify-content:space-between"><b>Notion</b><span class="pill2" style="display:inline-flex;background:#f1f1f3;color:#6f7277">Evaluated</span></span></div></div></div>
+    <div class="vis"><div class="ui"><div class="bd" style="font-family:Inter,sans-serif;font-size:13px;display:grid;gap:8px"><span style="display:flex;justify-content:space-between"><b>Stripe</b><span class="pill2 p-a" style="display:inline-flex">Interview</span></span><span style="display:flex;justify-content:space-between"><b>Linear</b><span class="pill2 p-t" style="display:inline-flex">Applied</span></span><span style="display:flex;justify-content:space-between"><b>Notion</b><span class="pill2" style="display:inline-flex;background:#f1f1f3;color:#55585e">Evaluated</span></span></div></div></div>
     <h3>Tracker</h3><p>Your whole pipeline. <code>/tau track</code></p></div>
   <a class="tile tau" href="onboarding/"><span class="n">[or]</span>
-    <div class="vis"><span class="streaks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="puffs" aria-hidden="true"><i></i><i></i><i></i></span><img class="rocket" src="icons/glass/apply.webp" alt="" /></div>
+    <div class="vis"><span class="streaks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="puffs" aria-hidden="true"><i></i><i></i><i></i></span><img loading="lazy" decoding="async" width="480" height="480" class="rocket" src="icons/glass/md/apply.webp" alt="" /></div>
     <h3>Or let the Tau agent run all seven</h3><p>Hands-free, inside LinkedIn — 20 applications a day. Launch my agent →</p></a>
 </div></section>
 
