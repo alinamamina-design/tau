@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Tau top card minimal</title>
+<!--
+  Minimal directions for the Tau card on an article's first screen: typography,
+  whitespace, one quiet product hint, one action. Built by design/build-cta.py →
+  public/top-card-minimal.html.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1c1d1f; --body: #3c3e43; --muted: #6f7277; --meta: #8b8e94; --faint: #c4c6cc;
+    --line: #ececee; --line-2: #e6e7ea; --panel: #f7f7f8;
+    --violet: #6d5dfb; --green: #22a35a;
+    --grad: linear-gradient(90deg, #2563eb 0%, #6d5dfb 52%, #9333ea 100%);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink); font: 400 16px/1.5 Inter, system-ui, sans-serif; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  .frame { max-width: 1440px; margin: 0 auto; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .top { border-bottom: 1px solid var(--line); }
+  .top .frame { display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 32px; }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 17px; }
+  .note { font-size: 13px; color: var(--meta); }
+  .intro .frame { padding: 64px 72px 48px; border-bottom: 1px solid var(--line); }
+  .intro h1 { margin: 0; max-width: 900px; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.04; letter-spacing: -.035em; font-weight: 600; }
+  .intro h1 span { color: var(--meta); }
+  .label { border-bottom: 1px solid var(--line); }
+  .label .frame { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; padding: 18px 72px; font-size: 13px; color: var(--meta); }
+  .label b { color: var(--ink); font-size: 14px; font-weight: 600; }
+
+  .split { border-bottom: 1px solid var(--line); background: #fff; }
+  .split .frame { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 64px; align-items: center; padding: 64px 72px; min-height: 560px; }
+  .crumbs { font-size: 14px; color: var(--meta); font-weight: 500; }
+  .split h2 { margin: 22px 0 0; font-size: clamp(2.1rem, 4vw, 3.4rem); line-height: 1.03; letter-spacing: -.04em; font-weight: 600; }
+  .split .ex { margin: 16px 0 0; font-size: 19px; color: var(--muted); max-width: 600px; }
+
+  .arrow { display: inline-block; transition: transform .25s cubic-bezier(.16,1,.3,1); }
+  a:hover .arrow { transform: translateX(4px); }
+  .tlink { display: inline-flex; align-items: center; gap: 10px; font-weight: 500; font-size: 16px; padding-bottom: 4px; border-bottom: 1px solid currentColor; }
+  .pillbtn { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 999px; font-weight: 500; font-size: 15px; }
+  .anim { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .logo { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 6px; }
+  .logo svg { width: 58%; height: 58%; fill: #fff; }
+
+  /* ── 1 · Editorial number: one huge thin numeral, a hairline, a text link */
+  .m1 { padding: 36px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
+  .m1 .k { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--meta); }
+  .m1 .num { display: flex; align-items: flex-start; gap: 10px; margin: 18px 0 6px; }
+  .m1 .num b { font-size: 132px; line-height: .82; font-weight: 300; letter-spacing: -.07em; }
+  .m1 .num span { margin-top: 10px; font-size: 15px; line-height: 1.35; color: var(--muted); }
+  .m1 p { margin: 18px 0 26px; font-size: 20px; line-height: 1.35; letter-spacing: -.02em; max-width: 360px; }
+
+  /* ── 2 · Ink: black card, one live line of text */
+  .m2 { position: relative; overflow: hidden; border-radius: 22px; padding: 34px; background: #0e0e0f; color: #fff; }
+  .m2 .k { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #6f7277; }
+  .m2 h3 { margin: 20px 0 0; font-size: 34px; line-height: 1.05; letter-spacing: -.04em; font-weight: 500; }
+  .m2 h3 em { font-style: normal; color: #8b8e94; }
+  .ticker { position: relative; height: 22px; margin: 34px 0 30px; overflow: hidden; font: 400 13px/22px var(--mono); color: #a1a4a9; }
+  .ticker div { position: absolute; inset: 0; display: flex; align-items: center; gap: 8px; animation: tick 9s infinite; opacity: 0; }
+  .ticker div:nth-child(2) { animation-delay: 3s; }
+  .ticker div:nth-child(3) { animation-delay: 6s; }
+  .ticker i { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+  @keyframes tick { 0% { opacity: 0; transform: translateY(8px); } 6%, 30% { opacity: 1; transform: none; } 36%, 100% { opacity: 0; transform: translateY(-8px); } }
+  .m2 .pillbtn { background: #fff; color: var(--ink); }
+
+  /* ── 3 · Object: a single glass object on air, two lines, one button */
+  .m3 { text-align: center; padding: 20px 0; }
+  .m3 .obj { position: relative; width: 220px; height: 220px; margin: 0 auto; }
+  .m3 .obj::before { content: ""; position: absolute; inset: 22%; border-radius: 50%; background: radial-gradient(closest-side, rgba(109,93,251,.28), transparent); filter: blur(18px); }
+  .m3 .obj img { position: relative; width: 100%; height: 100%; object-fit: contain; animation: bob 6s ease-in-out infinite; }
+  @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+  .m3 h3 { margin: 14px auto 8px; max-width: 340px; font-size: 30px; line-height: 1.08; letter-spacing: -.035em; font-weight: 600; }
+  .m3 p { margin: 0 0 24px; color: var(--muted); }
+  .m3 .pillbtn { background: var(--ink); color: #fff; }
+
+  /* ── 4 · Outline + monochrome dot loop */
+  .m4 { position: relative; overflow: hidden; border: 1px solid var(--line-2); border-radius: 22px; padding: 30px; min-height: 380px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .m4 .k { position: absolute; top: 26px; left: 30px; font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--meta); }
+  .m4 .k2 { position: absolute; top: 26px; right: 30px; display: flex; align-items: center; gap: 6px; font: 500 12px/1 var(--mono); color: var(--meta); }
+  .m4 .k2 i { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+  .m4 h3 { position: relative; margin: 0 0 18px; font-size: 30px; line-height: 1.06; letter-spacing: -.035em; font-weight: 600; max-width: 320px; }
+  .m4 .row { position: relative; display: flex; align-items: center; justify-content: space-between; padding-top: 18px; border-top: 1px solid var(--line); }
+
+  /* ── 5 · One sentence, one field */
+  .m5 { padding: 8px 0; }
+  .m5 h3 { margin: 0; font-size: 40px; line-height: 1.05; letter-spacing: -.045em; font-weight: 600; }
+  .m5 h3 span { color: var(--faint); }
+  .m5 form { display: flex; align-items: center; gap: 8px; margin-top: 30px; padding: 6px 6px 6px 18px; border: 1px solid var(--line-2); border-radius: 999px; }
+  .m5 input { flex: 1; min-width: 0; border: 0; outline: 0; font: 500 16px Inter, sans-serif; color: var(--ink); background: transparent; }
+  .m5 input::placeholder { color: var(--faint); }
+  .m5 button { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: 500 15px Inter, sans-serif; cursor: pointer; }
+  .m5 .logos { display: flex; align-items: center; gap: 10px; margin-top: 18px; font-size: 13px; color: var(--meta); }
+  .m5 .stack { display: flex; gap: 4px; }
+  .m5 .stack .logo { filter: grayscale(1); opacity: .55; }
+
+  /* ── 6 · Gradient hairline: white card, thin gradient top edge, status lines in mono */
+  .m6 { position: relative; border-radius: 20px; padding: 30px; background: #fff; box-shadow: 0 1px 0 var(--line-2), 0 30px 60px -40px rgba(30,30,80,.3); border: 1px solid var(--line-2); overflow: hidden; }
+  .m6::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--grad); }
+  .m6 h3 { margin: 4px 0 22px; font-size: 28px; line-height: 1.08; letter-spacing: -.035em; font-weight: 600; }
+  .m6 ul { margin: 0 0 26px; padding: 0; list-style: none; font: 400 13px/1 var(--mono); color: var(--body); }
+  .m6 li { display: flex; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px dashed var(--line-2); }
+  .m6 li span { flex: 1; }
+  .m6 li em { font-style: normal; color: var(--meta); }
+  .m6 li b { font-weight: 500; color: var(--green); }
+  .m6 li.now b { color: var(--violet); animation: blink 1.2s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: .35; } }
+
+  footer { padding: 40px 72px; color: var(--meta); font-size: 13px; }
+  @media (max-width: 1024px) {
+    .split .frame { grid-template-columns: 1fr; padding: 40px 24px; min-height: 0; gap: 40px; }
+    .intro .frame, .label .frame { padding-left: 24px; padding-right: 24px; }
+    .m1 .num b { font-size: 104px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } .ticker div:first-child { opacity: 1; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-tau" gradientUnits="userSpaceOnUse" x1="8" y1="0" x2="84" y2="0"><stop offset="0" stop-color="#2563EB" /><stop offset=".52" stop-color="#6D5DFB" /><stop offset="1" stop-color="#9333EA" /></linearGradient>
+    <symbol id="tau" viewBox="0 0 92 92"><path d="M8 17H84V30H46V59C46 64 50 68 55 68H59V81H55C43 81 33 71 33 59V30H8Z" fill="url(#g-tau)" /></symbol>
+    <symbol id="lg-Stripe" viewBox="0 0 24 24"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z" /></symbol>
+    <symbol id="lg-Spotify" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" /></symbol>
+    <symbol id="lg-Airbnb" viewBox="0 0 24 24"><path d="M12.001 18.275c-1.353-1.697-2.148-3.184-2.413-4.457-.263-1.027-.16-1.848.291-2.465.477-.71 1.188-1.056 2.121-1.056s1.643.345 2.12 1.063c.446.61.558 1.432.286 2.465-.291 1.298-1.085 2.785-2.412 4.458zm9.601 1.14c-.185 1.246-1.034 2.28-2.2 2.783-2.253.98-4.483-.583-6.392-2.704 3.157-3.951 3.74-7.028 2.385-9.018-.795-1.14-1.933-1.695-3.394-1.695-2.944 0-4.563 2.49-3.927 5.382.37 1.565 1.352 3.343 2.917 5.332-.98 1.085-1.91 1.856-2.732 2.333-.636.344-1.245.558-1.828.609-2.679.399-4.778-2.2-3.825-4.88.132-.345.395-.98.845-1.961l.025-.053c1.464-3.178 3.242-6.79 5.285-10.795l.053-.132.58-1.116c.45-.822.635-1.19 1.351-1.643.346-.21.77-.315 1.246-.315.954 0 1.698.558 2.016 1.007.158.239.345.557.582.953l.558 1.089.08.159c2.041 4.004 3.821 7.608 5.279 10.794l.026.025.533 1.22.318.764c.243.613.294 1.222.213 1.858zm1.22-2.39c-.186-.583-.505-1.271-.9-2.094v-.03c-1.889-4.006-3.642-7.608-5.307-10.844l-.111-.163C15.317 1.461 14.468 0 12.001 0c-2.44 0-3.476 1.695-4.535 3.898l-.081.16c-1.669 3.236-3.421 6.843-5.303 10.847v.053l-.559 1.22c-.21.504-.317.768-.345.847C-.172 20.74 2.611 24 5.98 24c.027 0 .132 0 .265-.027h.372c1.75-.213 3.554-1.325 5.384-3.317 1.829 1.989 3.635 3.104 5.382 3.317h.372c.133.027.239.027.265.027 3.37.003 6.152-3.261 4.802-6.975z" /></symbol>
+    <symbol id="lg-Linear" viewBox="0 0 24 24"><path d="M2.886 4.18A11.982 11.982 0 0 1 11.99 0C18.624 0 24 5.376 24 12.009c0 3.64-1.62 6.903-4.18 9.105L2.887 4.18ZM1.817 5.626l16.556 16.556c-.524.33-1.075.62-1.65.866L.951 7.277c.247-.575.537-1.126.866-1.65ZM.322 9.163l14.515 14.515c-.71.172-1.443.282-2.195.322L0 11.358a12 12 0 0 1 .322-2.195Zm-.17 4.862 9.823 9.824a12.02 12.02 0 0 1-9.824-9.824Z" /></symbol>
+    <symbol id="lg-Revolut" viewBox="0 0 24 24"><path d="M20.9133 6.9566C20.9133 3.1208 17.7898 0 13.9503 0H2.424v3.8605h10.9782c1.7376 0 3.177 1.3651 3.2087 3.043.016.84-.2994 1.633-.8878 2.2324-.5886.5998-1.375.9303-2.2144.9303H9.2322a.2756.2756 0 0 0-.2755.2752v3.431c0 .0585.018.1142.052.1612L16.2646 24h5.3114l-7.2727-10.094c3.6625-.1838 6.61-3.2612 6.61-6.9494zM6.8943 5.9229H2.424V24h4.4704z" /></symbol>
+    <symbol id="lg-Notion" viewBox="0 0 24 24"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z" /></symbol>
+    <symbol id="lg-Figma" viewBox="0 0 24 24"><path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z" /></symbol>
+    <symbol id="lg-N26" viewBox="0 0 24 24"><path d="M0 3.803v1.195h7.436V3.803H0zM12.69 7.29c-2.034 0-3.038 1.252-3.038 2.684 0 .234.027.468.092.728l1.393.135a3.697 3.697 0 0 1-.09-.793c0-1.072.71-1.586 1.598-1.586.866 0 1.507.485 1.507 1.652 0 1.186-.58 1.995-1.464 2.88-.925.923-2.4 2.027-3.112 2.534v1.092h6.135v-1.195h-4.168c.695-.48 1.69-1.279 2.133-1.72.502-.503 1.931-1.794 1.931-3.636 0-1.903-1.24-2.775-2.918-2.775zm8.34 0c-1.976 0-3.454 1.517-3.454 4.916 0 3.017 1.233 4.508 3.356 4.508 1.754 0 3.068-1.198 3.068-3.172 0-1.542-.823-3.066-2.793-3.066-1.1 0-1.884.51-2.281 1.263 0-1.78.62-3.33 2.094-3.33.937 0 1.309.538 1.507 1.422l1.366-.271c-.321-1.527-1.292-2.27-2.864-2.27zM.075 7.389v9.228h1.33v-6.312c0-.56-.013-.898-.039-1.223h.026c.136.372.298.699.539 1.123l3.732 6.412h1.69V7.39H6.04v6.31c0 .56.013.898.04 1.223h-.028a7.252 7.252 0 0 0-.537-1.123L1.783 7.389H.076zm20.817 4.185c1.114 0 1.744.822 1.744 1.992 0 1.256-.717 2.034-1.701 2.034-1.09 0-1.843-1.001-1.973-2.329.33-1.133 1.063-1.697 1.93-1.697zM0 19.008v1.19h7.436v-1.19H0z" /></symbol>
+  </defs>
+</svg>
+
+<header class="top"><div class="frame"><span class="brand"><svg width="22" height="22"><use href="#tau" /></svg> Tau</span><span class="note">Top card · minimal directions</span></div></header>
+<section class="intro"><div class="frame"><h1>Less card, more statement. <span>Six minimal takes on the top block.</span></h1></div></section>
+
+<!-- ═══ 1 -->
+<div class="label"><div class="frame"><b>1 · Editorial number</b> no box at all — one thin numeral between two rules, a text link</div></div>
+<section class="split"><div class="frame">
+  <div><div class="crumbs">Blog / LinkedIn</div><h2>Does the “Open to Work” banner hurt your chances?</h2><p class="ex">The green frame tells recruiters you’re available. It can also tell them you’re in a hurry.</p></div>
+  <aside class="m1">
+    <div class="k">Tau · job agent for LinkedIn</div>
+    <div class="num"><b>20</b><span>applications<br />a day</span></div>
+    <p>Your agent finds the roles, tailors your CV and applies. You just approve.</p>
+    <a class="tlink" href="onboarding/">Start on autopilot <span class="arrow">→</span></a>
+  </aside>
+</div></section>
+
+<!-- ═══ 2 -->
+<div class="label"><div class="frame"><b>2 · Ink</b> black card, a big quiet line, one live status ticking underneath</div></div>
+<section class="split"><div class="frame">
+  <div><div class="crumbs">Blog / Interviews</div><h2>How to answer “Tell me about yourself” (with examples)</h2><p class="ex">It’s the first question in almost every interview — and the easiest to get wrong.</p></div>
+  <aside class="m2">
+    <div class="k">Tau</div>
+    <h3>While you read this, <em>your agent could be applying.</em></h3>
+    <div class="ticker">
+      <div><i></i>applied · Product Designer · Stripe</div>
+      <div><i></i>applied · Data Analyst · Spotify</div>
+      <div><i></i>applied · Design Engineer · Linear</div>
+    </div>
+    <a class="pillbtn" href="onboarding/">Apply to 20 jobs a day <span class="arrow">→</span></a>
+  </aside>
+</div></section>
+
+<!-- ═══ 3 -->
+<div class="label"><div class="frame"><b>3 · Object</b> one glass object floating on air, two lines, one button — no frame</div></div>
+<section class="split"><div class="frame">
+  <div><div class="crumbs">Blog / Resume</div><h2>How to write a resume recruiters actually read</h2><p class="ex">Recruiters skim a CV in seconds before deciding.</p></div>
+  <aside class="m3">
+    <div class="obj"><img src="icons/glass/apply.webp" alt="" /></div>
+    <h3>Apply to 20 jobs a day on autopilot</h3>
+    <p>Tailored CV for each. You approve.</p>
+    <a class="pillbtn" href="onboarding/">Launch my agent <span class="arrow">→</span></a>
+  </aside>
+</div></section>
+
+<!-- ═══ 4 -->
+<div class="label"><div class="frame"><b>4 · Outline + loop</b> hairline card, a monochrome dot loop (filipz set) as the only image</div></div>
+<section class="split"><div class="frame">
+  <div><div class="crumbs">Blog / Cover letters</div><h2>Cover letters that get replies (and when to skip one)</h2><p class="ex">Most cover letters repeat the CV. The ones that get read are short and specific.</p></div>
+  <aside class="m4">
+    <canvas class="anim" data-anim="helix" data-color="28,29,31" data-size="1.1" data-x=".74" data-y=".36" data-alpha=".5"></canvas>
+    <span class="k">Tau</span><span class="k2"><i></i>scanning LinkedIn</span>
+    <h3>Apply to 20 jobs a day on autopilot.</h3>
+    <div class="row"><span class="note">Free trial · 5-minute setup</span><a class="tlink" href="onboarding/">Start <span class="arrow">→</span></a></div>
+  </aside>
+</div></section>
+
+<!-- ═══ 5 -->
+<div class="label"><div class="frame"><b>5 · One sentence, one field</b> typographic, the role field is the button</div></div>
+<section class="split"><div class="frame">
+  <div><div class="crumbs">Blog / Salary</div><h2>How to negotiate a job offer: scripts that work</h2><p class="ex">Most offers have room to move — and most candidates never ask.</p></div>
+  <aside class="m5">
+    <h3>20 tailored applications a day. <span>You just approve.</span></h3>
+    <form action="onboarding/" method="get"><input name="role" placeholder="Your role, e.g. Product Designer" aria-label="Role you are looking for" /><button type="submit">Start <span class="arrow">→</span></button></form>
+    <div class="logos"><span class="stack"><span class="logo" style="background:#635BFF"><svg><use href="#lg-Stripe" /></svg></span><span class="logo" style="background:#1ED760"><svg><use href="#lg-Spotify" /></svg></span><span class="logo" style="background:#FF5A5F"><svg><use href="#lg-Airbnb" /></svg></span><span class="logo" style="background:#5E6AD2"><svg><use href="#lg-Linear" /></svg></span></span>New LinkedIn roles every hour</div>
+  </aside>
+</div></section>
+
+<!-- ═══ 6 -->
+<div class="label"><div class="frame"><b>6 · Log</b> white card with a thin gradient edge, the agent’s activity as a quiet mono log</div></div>
+<section class="split"><div class="frame">
+  <div><div class="crumbs">Blog / Job search</div><h2>How long does it take to hear back after an interview?</h2><p class="ex">Silence after an interview is stressful — and usually not about you.</p></div>
+  <aside class="m6">
+    <h3>Apply to 20 jobs a day on autopilot</h3>
+    <ul>
+      <li><span>Product Designer · Stripe</span><em>09:12</em><b>applied</b></li>
+      <li><span>Data Analyst · Spotify</span><em>09:40</em><b>applied</b></li>
+      <li class="now"><span>Design Engineer · Linear</span><em>now</em><b>tailoring</b></li>
+    </ul>
+    <a class="tlink" href="onboarding/">Launch my agent for free <span class="arrow">→</span></a>
+  </aside>
+</div></section>
+
+<footer>Tau · top card minimal directions · 19 Oct 2026</footer>
+<script>
+/*
+ * Dot-matrix loops behind the product cards — adapted from "Set of Animations 4"
+ * by filipz on 21st.dev (https://21st.dev/@filipz/components/set-of-animations-4).
+ * ⚠️ Licence unknown — fine for this review draft; ask the author or re-create before shipping.
+ * <canvas class="anim" data-anim="sphere|sonar|helix|waves|phased|cube" data-color="r,g,b"
+ *         data-size="1.6" data-x=".5" data-y=".5" data-alpha="1">
+ * Each loop is drawn in the original 180×180 space, scaled to the canvas; runs only on screen.
+ */
+(() => {
+  const SPEED = 0.5, S = 180, C = S / 2;
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  // RS keeps dots and lines at their original on-screen size while the loop itself is scaled up
+  let RS = 1;
+  const dot = (ctx, x, y, r, fill) => { ctx.beginPath(); ctx.arc(x, y, Math.max(0, r) * RS, 0, 6.2832); ctx.fillStyle = fill; ctx.fill(); };
+
+  const LOOPS = {
+    sphere() {
+      const R = S * 0.4, N = 250;
+      const pts = Array.from({ length: N }, (_, i) => { const th = Math.acos(1 - 2 * (i / N)), ph = Math.sqrt(N * Math.PI) * th; return [R * Math.sin(th) * Math.cos(ph), R * Math.sin(th) * Math.sin(ph), R * Math.cos(th)]; });
+      return (ctx, ms, F) => {
+        const t = ms * 0.0005 * SPEED, rx = Math.sin(t * 0.3) * 0.5, ry = t * 0.5, scan = (ease((Math.sin(t * 2.5) + 1) / 2) * 2 - 1) * R;
+        for (let [x, y, z] of pts) {
+          let nx = x * Math.cos(ry) - z * Math.sin(ry), nz = x * Math.sin(ry) + z * Math.cos(ry); x = nx; z = nz;
+          let ny = y * Math.cos(rx) - z * Math.sin(rx); nz = y * Math.sin(rx) + z * Math.cos(rx); y = ny; z = nz;
+          const sc = (z + R * 1.5) / (R * 2.5), d = Math.abs(y - scan), inf = d < 25 ? Math.cos((d / 25) * Math.PI / 2) : 0;
+          dot(ctx, C + x, C + y, sc * 2 + inf * 2.5, F(sc * 0.6 + inf * 0.4));
+        }
+      };
+    },
+    sonar() {
+      const fade = 2500, rings = [];
+      for (let r = 20; r <= 80; r += 15) for (let i = 0; i < r / 2; i++) rings.push({ r, a: (i / (r / 2)) * Math.PI * 2, seen: -fade });
+      return (ctx, ms, F, Sx) => {
+        const a = (ms * 0.001 * (Math.PI / 2) * SPEED) % (Math.PI * 2);
+        ctx.beginPath(); ctx.moveTo(C, C); ctx.lineTo(C + 85 * Math.cos(a), C + 85 * Math.sin(a)); ctx.strokeStyle = Sx(0.5); ctx.lineWidth = 1 * RS; ctx.stroke();
+        for (const d of rings) {
+          let diff = Math.abs(d.a - a); if (diff > Math.PI) diff = Math.PI * 2 - diff;
+          if (diff < 0.05) d.seen = ms;
+          const since = ms - d.seen;
+          if (since < fade) { const o = 1 - ease(since / fade); dot(ctx, C + d.r * Math.cos(d.a), C + d.r * Math.sin(d.a), 1 + o * 1.5, F(o)); }
+        }
+      };
+    },
+    helix() {
+      const N = 100, R = 35, H = 120, pts = Array.from({ length: N }, (_, i) => ({ a: i * 0.3, y: (i / N) * H - H / 2 }));
+      return (ctx, ms, F) => {
+        const t = ms * 0.001 * SPEED, scanY = Math.sin((t / 8) * Math.PI * 2) * (H / 2), up = Math.cos((t / 8) * Math.PI * 2) > 0, trail = H * 0.3;
+        for (const d of pts) {
+          const x = R * Math.cos(d.a + t), z = R * Math.sin(d.a + t), sc = (z + R) / (R * 2), dist = Math.abs(d.y - scanY);
+          const lead = dist < 25 ? Math.cos((dist / 25) * Math.PI / 2) : 0, behind = d.y - scanY;
+          const tr = (up && behind < 0 && -behind < trail) || (!up && behind > 0 && behind < trail) ? Math.pow(1 - Math.abs(behind) / trail, 2) * 0.4 : 0;
+          const inf = Math.max(lead, tr);
+          dot(ctx, C + x, C + d.y, sc * 1.8 + inf * 2.8, F(sc * 0.4 + inf * 0.6));
+        }
+      };
+    },
+    waves() {
+      const rings = [{ r: 20, n: 12 }, { r: 45, n: 24 }, { r: 70, n: 36 }];
+      return (ctx, ms, F, Sx) => {
+        const t = ms * 0.001 * SPEED;
+        rings.forEach((g, gi) => {
+          if (gi >= rings.length - 1) return;
+          const nx = rings[gi + 1], ratio = nx.n / g.n;
+          for (let i = 0; i < g.n; i++) {
+            const a1 = (i / g.n) * Math.PI * 2, p1 = Math.sin(t * 2 - gi * 0.4) * 3, x1 = C + Math.cos(a1) * (g.r + p1), y1 = C + Math.sin(a1) * (g.r + p1);
+            for (let j = 0; j < ratio; j++) {
+              const a2 = ((i * ratio + j) / nx.n) * Math.PI * 2, p2 = Math.sin(t * 2 - (gi + 1) * 0.4) * 3;
+              ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(C + Math.cos(a2) * (nx.r + p2), C + Math.sin(a2) * (nx.r + p2));
+              ctx.lineWidth = 0.75 * RS; ctx.strokeStyle = Sx(0.1 + ((Math.sin(t * 3 - gi * 0.5 + i * 0.3) + 1) / 2) * 0.4); ctx.stroke();
+            }
+          }
+        });
+        rings.forEach((g, gi) => { for (let i = 0; i < g.n; i++) { const a = (i / g.n) * Math.PI * 2, p = Math.sin(t * 2 - gi * 0.4) * 3; dot(ctx, C + Math.cos(a) * (g.r + p), C + Math.sin(a) * (g.r + p), 1.5, F(0.4 + Math.sin(t * 2 - gi * 0.4 + i * 0.2) * 0.6)); } });
+      };
+    },
+    phased() {
+      const radii = [20, 40, 60, 80], per = [12, 18, 24, 30], pts = [];
+      radii.forEach((r, i) => { for (let j = 0; j < per[i]; j++) { const a = (j / per[i]) * Math.PI * 2; pts.push([Math.cos(a) * r, Math.sin(a) * r]); } });
+      return (ctx, ms, F) => {
+        const t = ms * 0.001 * SPEED, rx = 1.0, ry = t * 0.2, wave = (t * 120) % (80 * 1.8), out = [];
+        for (let [x, y] of pts) {
+          let z = 0, inf = 0; const d = Math.abs(Math.hypot(x, y) - wave);
+          if (d < 25) { z = ease(Math.sin((1 - d / 25) * Math.PI)) * 18; inf = z / 18; }
+          let tx = x * Math.cos(ry) - z * Math.sin(ry), tz = x * Math.sin(ry) + z * Math.cos(ry); x = tx; z = tz;
+          let ty = y * Math.cos(rx) - z * Math.sin(rx); tz = y * Math.sin(rx) + z * Math.cos(rx); y = ty; z = tz;
+          const sc = 300 / (300 + z + 100); out.push([C + x * sc, C + y * sc, z, (1.5 + inf * 2.5) * sc, 0.4 + inf * 0.6]);
+        }
+        out.sort((a, b) => a[2] - b[2]).forEach((p) => dot(ctx, p[0], p[1], p[3], F(p[4])));
+      };
+    },
+    cube() {
+      const g = 7, sp = 15, h = ((g - 1) * sp) / 2, max = Math.hypot(h, h, h), pts = [];
+      for (let x = 0; x < g; x++) for (let y = 0; y < g; y++) for (let z = 0; z < g; z++) pts.push([x * sp - h, y * sp - h, z * sp - h]);
+      return (ctx, ms, F) => {
+        const t = ms * 0.0003 * SPEED, rx = t * 2, ry = t * 3, wave = (ms * 0.04 * SPEED) % (max * 1.5), out = [];
+        for (let [x, y, z] of pts) {
+          const dc = Math.hypot(x, y, z); let inf = 0;
+          if (dc > 0 && Math.abs(dc - wave) < 20) { const dis = ease(Math.cos((Math.abs(dc - wave) / 20) * Math.PI / 2)) * 10, k = (dc + dis) / dc; x *= k; y *= k; z *= k; inf = dis / 10; }
+          let tx = x * Math.cos(ry) - z * Math.sin(ry), tz = x * Math.sin(ry) + z * Math.cos(ry); x = tx; z = tz;
+          let ty = y * Math.cos(rx) - z * Math.sin(rx); tz = y * Math.sin(rx) + z * Math.cos(rx); y = ty; z = tz;
+          const sc = 250 / (250 + z), size = (1.5 + inf * 2.5) * sc;
+          if (size > 0.1) out.push([C + x * sc, C + y * sc, z, size, Math.max(0.1, sc * 0.7 + inf * 0.4)]);
+        }
+        out.sort((a, b) => a[2] - b[2]).forEach((p) => dot(ctx, p[0], p[1], p[3], F(p[4])));
+      };
+    },
+  };
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll("canvas.anim").forEach((cv) => {
+    const make = LOOPS[cv.dataset.anim]; if (!make) return;
+    const draw = make(), ctx = cv.getContext("2d");
+    const col = cv.dataset.color || "255,255,255", alpha = +(cv.dataset.alpha || 1);
+    const F = (o) => `rgba(${col},${Math.max(0, Math.min(1, o)) * alpha})`;
+    const size = +(cv.dataset.size || 1.6), cx = +(cv.dataset.x || 0.5), cy = +(cv.dataset.y || 0.5);
+    let W = 0, H = 0, dpr = 1, raf = 0;
+    const fit = () => { dpr = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; };
+    const frame = (ms) => {
+      ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height);
+      const k = (Math.min(W, H) / S) * size * dpr;
+      ctx.setTransform(k, 0, 0, k, W * cx * dpr - C * k, H * cy * dpr - C * k);
+      RS = (dpr * 1.25) / k;
+      draw(ctx, ms, F, F);
+    };
+    const loop = (ms) => { frame(ms); raf = requestAnimationFrame(loop); };
+    fit(); frame(4000);
+    new ResizeObserver(() => { fit(); frame(performance.now()); }).observe(cv);
+    if (reduce) return;
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !raf) raf = requestAnimationFrame(loop);
+      else if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
+    }).observe(cv);
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Tau article hero CTAs</title>
+<!--
+  ONE article hero template (title left, CTA card right) with EIGHT different CTA
+  offers — each a different hook into Tau, not the same block with a new picture.
+  Built by design/build-cta.py → public/article-hero-ctas.html.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1c1d1f; --body: #3c3e43; --muted: #6f7277; --meta: #8b8e94; --faint: #c4c6cc;
+    --line: #ececee; --line-2: #e6e7ea; --panel: #f7f7f8; --chip: #f1f1f3;
+    --violet: #6d5dfb; --violet-ink: #5644e6; --violet-bg: #f1efff; --green: #1a7f3c; --green-dot: #22a35a; --green-bg: #e7f6ec;
+    --grad: linear-gradient(90deg, #2563eb 0%, #6d5dfb 52%, #9333ea 100%);
+    --grad-d: linear-gradient(140deg, #2563eb 0%, #6d5dfb 55%, #9333ea 100%);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink); font: 400 16px/1.5 Inter, system-ui, sans-serif; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button, input, select { font: inherit; }
+  .frame { max-width: 1440px; margin: 0 auto; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .top { border-bottom: 1px solid var(--line); }
+  .top .frame { display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 32px; }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 17px; }
+  .note { font-size: 13px; color: var(--meta); }
+  .label { border-bottom: 1px solid var(--line); }
+  .label .frame { padding: 14px 72px; font-size: 13px; color: var(--meta); }
+  .label b { color: var(--ink); font-weight: 600; }
+
+  /* ═══ the template (fixed) */
+  .hero { border-bottom: 1px solid var(--line); }
+  .hero .frame { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 64px; align-items: center; padding: 64px 72px 72px; }
+  .crumbs { font-size: 14px; font-weight: 500; color: var(--meta); }
+  .crumbs span { color: var(--violet-ink); }
+  .hero h1 { margin: 20px 0 0; font-size: clamp(2.4rem, 4.6vw, 4rem); line-height: 1.02; letter-spacing: -.045em; font-weight: 600; text-wrap: balance; }
+  .hero .lead { margin: 20px 0 0; max-width: 560px; font-size: 19px; color: var(--muted); }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-top: 28px; font-size: 14px; font-weight: 500; color: var(--meta); }
+  .meta .au { display: flex; align-items: center; gap: 8px; color: var(--ink); }
+  .meta .av { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line-2); }
+
+  /* the CTA slot: same size and shape every time, the content is what changes */
+  .slot { position: relative; overflow: hidden; border-radius: 28px; min-height: 540px; padding: 30px; display: flex; flex-direction: column; box-shadow: 0 50px 100px -50px rgba(40,40,120,.45); }
+  .slot.light { background: #fff; border: 1px solid var(--line-2); }
+  .slot.soft { background: radial-gradient(70% 60% at 20% 0%, #dbeafe, transparent), radial-gradient(70% 70% at 100% 100%, #ede9fe, transparent), #f7f7f8; }
+  .slot.grad { background: var(--grad-d); color: #fff; }
+  .slot.dark { background: #111; color: #fff; }
+  .tag { display: inline-flex; align-self: flex-start; align-items: center; gap: 7px; border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 500; background: var(--violet-bg); color: var(--violet-ink); }
+  .grad .tag, .dark .tag { background: rgba(255,255,255,.14); color: #fff; }
+  .slot h2 { margin: 16px 0 8px; font-size: 30px; line-height: 1.08; letter-spacing: -.035em; font-weight: 700; }
+  .slot .sub { margin: 0; color: var(--muted); font-size: 15px; }
+  .grad .sub { color: rgba(255,255,255,.82); }
+  .dark .sub { color: #a1a4a9; }
+  .grow { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 22px 0; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; height: 50px; padding: 0 22px; border: 0; border-radius: 14px; background: var(--ink); color: #fff; font-weight: 600; font-size: 15px; cursor: pointer; width: 100%; }
+  .btn svg { width: 15px; height: 15px; transition: transform .2s; }
+  .btn:hover svg { transform: translateX(3px); }
+  .grad .btn, .dark .btn { background: #fff; color: var(--ink); }
+  .fine { margin-top: 10px; text-align: center; font-size: 12.5px; color: var(--meta); }
+  .grad .fine { color: rgba(255,255,255,.75); }
+  .field { display: flex; align-items: center; gap: 8px; height: 50px; padding: 0 16px; border-radius: 14px; border: 1px solid var(--line-2); background: #fff; color: var(--ink); }
+  .field span { color: var(--meta); font-size: 14px; white-space: nowrap; }
+  .field input, .field select { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-weight: 600; font-size: 15px; color: var(--ink); appearance: none; }
+  .stack { display: grid; gap: 10px; }
+  .logo { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; }
+  .logo svg { width: 58%; height: 58%; fill: #fff; }
+  .pill { display: inline-flex; align-items: center; gap: 5px; border-radius: 7px; padding: 3px 8px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .p-green { background: var(--green-bg); color: var(--green); }
+  .p-violet { background: var(--violet-bg); color: var(--violet-ink); }
+  .warn { color: #b45309; }
+
+  /* 1 · CV score */
+  .drop { display: grid; place-items: center; gap: 6px; height: 150px; border: 1.5px dashed #c7cbe0; border-radius: 18px; background: rgba(255,255,255,.7); text-align: center; color: var(--muted); font-size: 14px; cursor: pointer; transition: border-color .2s, background .2s; }
+  .drop:hover { border-color: var(--violet); background: #fff; }
+  .drop b { color: var(--ink); }
+  .gauge { display: flex; align-items: center; gap: 16px; margin-top: 16px; padding: 14px; border-radius: 16px; background: #fff; border: 1px solid var(--line); }
+  .gauge svg { width: 64px; height: 64px; transform: rotate(-90deg); }
+  .gauge circle { fill: none; stroke-width: 7; }
+  .gauge p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.4; }
+  .gauge p b { display: block; color: var(--ink); font-size: 15px; }
+
+  /* 2 · live roles */
+  .feed { display: grid; gap: 8px; margin-top: 14px; }
+  .feed .r { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,.08); font-size: 13.5px; }
+  .feed .r b { flex: 1; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .feed .r span { color: #8b8e94; font-size: 12px; }
+  .bignum { font-size: 64px; line-height: .9; font-weight: 700; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
+  .dark select { color: #fff; } .dark .field { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); color: #fff; } .dark .field span { color: #8b8e94; } .dark .field select option { color: var(--ink); }
+
+  /* 3 · time calculator */
+  .calc { padding: 18px; border-radius: 18px; background: #fff; border: 1px solid var(--line); }
+  .calc label { display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); }
+  .calc label b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .calc input[type=range] { width: 100%; margin: 14px 0 6px; accent-color: var(--violet); }
+  .saved { display: flex; align-items: baseline; gap: 10px; margin-top: 18px; }
+  .saved b { font-size: 60px; line-height: .9; letter-spacing: -.05em; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .saved > span { color: var(--muted); font-size: 15px; line-height: 1.3; }
+
+  /* 4 · free pack */
+  .pack { position: relative; height: 210px; margin: 6px 0 4px; }
+  .doc { position: absolute; width: 170px; height: 210px; border-radius: 14px; background: #fff; border: 1px solid var(--line); box-shadow: 0 20px 40px -20px rgba(28,29,31,.35); padding: 16px; font-size: 11px; color: var(--meta); }
+  .doc b { display: block; font-size: 13px; color: var(--ink); line-height: 1.25; margin-bottom: 10px; }
+  .doc i { display: block; height: 6px; margin: 7px 0; border-radius: 3px; background: var(--chip); }
+  .doc i.s { width: 70%; }
+
+  /* 5 · hiring manager finder */
+  .people { display: grid; gap: 8px; margin-top: 14px; }
+  .person { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: #fff; border: 1px solid var(--line); }
+  .person img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+  .person .t { flex: 1; line-height: 1.25; }
+  .person .t b { display: block; font-size: 14px; }
+  .person .t span { font-size: 12px; color: var(--meta); }
+  .blur { filter: blur(4px); user-select: none; }
+
+  /* 6 · profile check quiz */
+  .q { margin-top: 16px; padding: 18px; border-radius: 18px; background: rgba(255,255,255,.12); }
+  .q p { margin: 0 0 12px; font-weight: 600; }
+  .q .opts { display: grid; gap: 8px; }
+  .q button { text-align: left; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.08); color: #fff; cursor: pointer; transition: background .2s; }
+  .q button:hover { background: rgba(255,255,255,.2); }
+  .steps { display: flex; gap: 6px; margin-top: 14px; }
+  .steps i { flex: 1; height: 4px; border-radius: 2px; background: rgba(255,255,255,.25); }
+  .steps i.on { background: #fff; }
+
+  /* 7 · autopilot */
+  .ap { margin-top: 14px; background: #fff; color: var(--ink); border-radius: 16px; overflow: hidden; }
+  .ap .h { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--meta); }
+  .ap .h b { color: var(--ink); }
+  .live { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; color: var(--ink); }
+  .live i { width: 7px; height: 7px; border-radius: 50%; background: var(--green-dot); animation: ping 1.8s infinite; }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(34,163,90,.5); } 80%, 100% { box-shadow: 0 0 0 7px rgba(34,163,90,0); } }
+  .ap .row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; font-size: 13.5px; }
+  .ap .row + .row { border-top: 1px solid var(--line); }
+  .ap .row b { flex: 1; font-weight: 600; }
+
+  /* 8 · interview prep */
+  .bubble { max-width: 88%; padding: 12px 14px; border-radius: 16px; font-size: 14px; line-height: 1.45; }
+  .bubble.ai { background: #fff; border: 1px solid var(--line); border-bottom-left-radius: 6px; }
+  .bubble.me { margin-left: auto; background: var(--ink); color: #fff; border-bottom-right-radius: 6px; }
+  .bubble small { display: block; margin-bottom: 4px; font-size: 11.5px; font-weight: 600; color: var(--violet-ink); }
+  .chat { display: grid; gap: 10px; }
+  .fb { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  footer { padding: 40px 72px; color: var(--meta); font-size: 13px; }
+  @media (max-width: 1024px) {
+    .hero .frame { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px 48px; }
+    .label .frame { padding: 14px 24px; }
+    .slot { max-width: 520px; min-height: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-tau" gradientUnits="userSpaceOnUse" x1="8" y1="0" x2="84" y2="0"><stop offset="0" stop-color="#2563EB" /><stop offset=".52" stop-color="#6D5DFB" /><stop offset="1" stop-color="#9333EA" /></linearGradient>
+    <linearGradient id="g-arc" x1="0" x2="1"><stop offset="0" stop-color="#2563eb" /><stop offset="1" stop-color="#9333ea" /></linearGradient>
+    <symbol id="tau" viewBox="0 0 92 92"><path d="M8 17H84V30H46V59C46 64 50 68 55 68H59V81H55C43 81 33 71 33 59V30H8Z" fill="url(#g-tau)" /></symbol>
+    <symbol id="tau-w" viewBox="0 0 92 92"><path d="M8 17H84V30H46V59C46 64 50 68 55 68H59V81H55C43 81 33 71 33 59V30H8Z" fill="#fff" /></symbol>
+    <symbol id="arrow" viewBox="0 0 16 16"><path d="M3 8h9.5M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+    <symbol id="lg-Stripe" viewBox="0 0 24 24"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z" /></symbol>
+    <symbol id="lg-Spotify" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" /></symbol>
+    <symbol id="lg-Airbnb" viewBox="0 0 24 24"><path d="M12.001 18.275c-1.353-1.697-2.148-3.184-2.413-4.457-.263-1.027-.16-1.848.291-2.465.477-.71 1.188-1.056 2.121-1.056s1.643.345 2.12 1.063c.446.61.558 1.432.286 2.465-.291 1.298-1.085 2.785-2.412 4.458zm9.601 1.14c-.185 1.246-1.034 2.28-2.2 2.783-2.253.98-4.483-.583-6.392-2.704 3.157-3.951 3.74-7.028 2.385-9.018-.795-1.14-1.933-1.695-3.394-1.695-2.944 0-4.563 2.49-3.927 5.382.37 1.565 1.352 3.343 2.917 5.332-.98 1.085-1.91 1.856-2.732 2.333-.636.344-1.245.558-1.828.609-2.679.399-4.778-2.2-3.825-4.88.132-.345.395-.98.845-1.961l.025-.053c1.464-3.178 3.242-6.79 5.285-10.795l.053-.132.58-1.116c.45-.822.635-1.19 1.351-1.643.346-.21.77-.315 1.246-.315.954 0 1.698.558 2.016 1.007.158.239.345.557.582.953l.558 1.089.08.159c2.041 4.004 3.821 7.608 5.279 10.794l.026.025.533 1.22.318.764c.243.613.294 1.222.213 1.858zm1.22-2.39c-.186-.583-.505-1.271-.9-2.094v-.03c-1.889-4.006-3.642-7.608-5.307-10.844l-.111-.163C15.317 1.461 14.468 0 12.001 0c-2.44 0-3.476 1.695-4.535 3.898l-.081.16c-1.669 3.236-3.421 6.843-5.303 10.847v.053l-.559 1.22c-.21.504-.317.768-.345.847C-.172 20.74 2.611 24 5.98 24c.027 0 .132 0 .265-.027h.372c1.75-.213 3.554-1.325 5.384-3.317 1.829 1.989 3.635 3.104 5.382 3.317h.372c.133.027.239.027.265.027 3.37.003 6.152-3.261 4.802-6.975z" /></symbol>
+    <symbol id="lg-Linear" viewBox="0 0 24 24"><path d="M2.886 4.18A11.982 11.982 0 0 1 11.99 0C18.624 0 24 5.376 24 12.009c0 3.64-1.62 6.903-4.18 9.105L2.887 4.18ZM1.817 5.626l16.556 16.556c-.524.33-1.075.62-1.65.866L.951 7.277c.247-.575.537-1.126.866-1.65ZM.322 9.163l14.515 14.515c-.71.172-1.443.282-2.195.322L0 11.358a12 12 0 0 1 .322-2.195Zm-.17 4.862 9.823 9.824a12.02 12.02 0 0 1-9.824-9.824Z" /></symbol>
+    <symbol id="lg-Revolut" viewBox="0 0 24 24"><path d="M20.9133 6.9566C20.9133 3.1208 17.7898 0 13.9503 0H2.424v3.8605h10.9782c1.7376 0 3.177 1.3651 3.2087 3.043.016.84-.2994 1.633-.8878 2.2324-.5886.5998-1.375.9303-2.2144.9303H9.2322a.2756.2756 0 0 0-.2755.2752v3.431c0 .0585.018.1142.052.1612L16.2646 24h5.3114l-7.2727-10.094c3.6625-.1838 6.61-3.2612 6.61-6.9494zM6.8943 5.9229H2.424V24h4.4704z" /></symbol>
+    <symbol id="lg-Notion" viewBox="0 0 24 24"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z" /></symbol>
+    <symbol id="lg-Figma" viewBox="0 0 24 24"><path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z" /></symbol>
+    <symbol id="lg-N26" viewBox="0 0 24 24"><path d="M0 3.803v1.195h7.436V3.803H0zM12.69 7.29c-2.034 0-3.038 1.252-3.038 2.684 0 .234.027.468.092.728l1.393.135a3.697 3.697 0 0 1-.09-.793c0-1.072.71-1.586 1.598-1.586.866 0 1.507.485 1.507 1.652 0 1.186-.58 1.995-1.464 2.88-.925.923-2.4 2.027-3.112 2.534v1.092h6.135v-1.195h-4.168c.695-.48 1.69-1.279 2.133-1.72.502-.503 1.931-1.794 1.931-3.636 0-1.903-1.24-2.775-2.918-2.775zm8.34 0c-1.976 0-3.454 1.517-3.454 4.916 0 3.017 1.233 4.508 3.356 4.508 1.754 0 3.068-1.198 3.068-3.172 0-1.542-.823-3.066-2.793-3.066-1.1 0-1.884.51-2.281 1.263 0-1.78.62-3.33 2.094-3.33.937 0 1.309.538 1.507 1.422l1.366-.271c-.321-1.527-1.292-2.27-2.864-2.27zM.075 7.389v9.228h1.33v-6.312c0-.56-.013-.898-.039-1.223h.026c.136.372.298.699.539 1.123l3.732 6.412h1.69V7.39H6.04v6.31c0 .56.013.898.04 1.223h-.028a7.252 7.252 0 0 0-.537-1.123L1.783 7.389H.076zm20.817 4.185c1.114 0 1.744.822 1.744 1.992 0 1.256-.717 2.034-1.701 2.034-1.09 0-1.843-1.001-1.973-2.329.33-1.133 1.063-1.697 1.93-1.697zM0 19.008v1.19h7.436v-1.19H0z" /></symbol>
+  </defs>
+</svg>
+
+<header class="top"><div class="frame"><span class="brand"><svg width="22" height="22"><use href="#tau" /></svg> Tau</span><span class="note">Article hero · one template, 8 different CTA offers</span></div></header>
+
+<!-- ═══ 1 · Free CV score -->
+<div class="label"><div class="frame"><b>CTA 1 · Free CV score</b> — a free tool as the hook: drop your CV, get an ATS score → sign-up</div></div>
+<section class="hero"><div class="frame">
+  <div><div class="crumbs">Blog / <span>Resume</span></div><h1>How to write a resume recruiters actually read</h1><p class="lead">Recruiters skim a CV in seconds before deciding. Here’s what they look at first.</p><div class="meta"><span class="au"><span class="av"><svg width="14" height="14"><use href="#tau" /></svg></span>Tau team</span><span>6 min read</span></div></div>
+  <aside class="slot soft">
+    <span class="tag">Free tool</span>
+    <h2>How does your CV score with an ATS?</h2>
+    <p class="sub">Drop it here — get your score and 3 fixes in 30 seconds.</p>
+    <div class="grow">
+      <label class="drop"><input type="file" hidden /><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6d5dfb" stroke-width="1.8" stroke-linecap="round"><path d="M12 16V4M7 9l5-5 5 5M5 20h14" /></svg><span><b>Drop your CV</b> or click to upload</span><span style="font-size:12px">PDF or DOCX</span></label>
+      <div class="gauge"><svg viewBox="0 0 74 74"><circle cx="37" cy="37" r="32" stroke="#f1f1f3" /><circle cx="37" cy="37" r="32" stroke="url(#g-arc)" stroke-linecap="round" stroke-dasharray="201" stroke-dasharray="201" stroke-dashoffset="52" /></svg><p><b>Example: 74 / 100</b>Missing keywords: design systems, A/B testing</p></div>
+    </div>
+    <a class="btn" href="onboarding/">Check my CV free <svg><use href="#arrow" /></svg></a>
+  </aside>
+</div></section>
+
+<!-- ═══ 2 · Live roles -->
+<div class="label"><div class="frame"><b>CTA 2 · Live roles for you</b> — pick role + city, see what was posted this week → sign-up · ⚠️ sample numbers</div></div>
+<section class="hero"><div class="frame">
+  <div><div class="crumbs">Blog / <span>LinkedIn</span></div><h1>Does the “Open to Work” banner hurt your chances?</h1><p class="lead">The green frame tells recruiters you’re available. It can also tell them you’re in a hurry.</p><div class="meta"><span class="au"><span class="av"><svg width="14" height="14"><use href="#tau" /></svg></span>Tau team</span><span>4 min read</span></div></div>
+  <aside class="slot dark">
+    <span class="tag">Posted on LinkedIn this week</span>
+    <div class="grow">
+      <div class="bignum">137</div>
+      <p class="sub" style="margin-top:6px">new roles for <b style="color:#fff">Product Designer</b> in <b style="color:#fff">Berlin</b></p>
+      <div class="feed">
+        <div class="r"><span class="logo" style="background:#635BFF;width:26px;height:26px"><svg><use href="#lg-Stripe" /></svg></span><b>Product Designer · Stripe</b><span>2h ago</span></div>
+        <div class="r"><span class="logo" style="background:#48AC98;width:26px;height:26px"><svg><use href="#lg-N26" /></svg></span><b>UX Designer · N26</b><span>5h ago</span></div>
+        <div class="r"><span class="logo" style="background:#5E6AD2;width:26px;height:26px"><svg><use href="#lg-Linear" /></svg></span><b>Design Engineer · Linear</b><span>1d ago</span></div>
+      </div>
+    </div>
+    <div class="stack">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><label class="field"><select aria-label="Role"><option>Product Designer</option><option>Data Analyst</option><option>Frontend Engineer</option></select></label><label class="field"><select aria-label="City"><option>Berlin</option><option>London</option><option>Remote EU</option></select></label></div>
+      <a class="btn" href="onboarding/">Send me these roles <svg><use href="#arrow" /></svg></a>
+    </div>
+  </aside>
+</div></section>
+
+<!-- ═══ 3 · Time calculator -->
+<div class="label"><div class="frame"><b>CTA 3 · Time-saved calculator</b> — move the slider, see the hours Tau gives back (assumes ~25 min per tailored application)</div></div>
+<section class="hero"><div class="frame">
+  <div><div class="crumbs">Blog / <span>Job search</span></div><h1>How many applications a day is too many?</h1><p class="lead">Volume helps — until quality drops. Here’s a simple way to find your number.</p><div class="meta"><span class="au"><span class="av"><svg width="14" height="14"><use href="#tau" /></svg></span>Tau team</span><span>3 min read</span></div></div>
+  <aside class="slot light">
+    <span class="tag">Calculator</span>
+    <h2>How much time does your search take?</h2>
+    <div class="grow">
+      <div class="calc">
+        <label>Tailored applications a week <b data-apps>20</b></label>
+        <input type="range" min="5" max="100" step="5" value="20" data-range aria-label="Applications a week" />
+        <div class="saved"><b><span data-hours>8</span>h</b><span>a week you’d get back<br />with Tau doing it for you</span></div>
+      </div>
+    </div>
+    <a class="btn" href="onboarding/">Get my hours back <svg><use href="#arrow" /></svg></a>
+    <div class="fine">Free trial · 5-minute setup</div>
+  </aside>
+</div></section>
+
+<!-- ═══ 4 · Free pack -->
+<div class="label"><div class="frame"><b>CTA 4 · Free template pack</b> — a lead magnet (Oria-style): email for a pack → nurture into Tau</div></div>
+<section class="hero"><div class="frame">
+  <div><div class="crumbs">Blog / <span>Cover letters</span></div><h1>Cover letters that get replies (and when to skip one)</h1><p class="lead">Most cover letters repeat the CV. The ones that get read are short, specific and about the company.</p><div class="meta"><span class="au"><span class="av"><svg width="14" height="14"><use href="#tau" /></svg></span>Tau team</span><span>4 min read</span></div></div>
+  <aside class="slot soft">
+    <span class="tag">Free download</span>
+    <h2>20 messages that got hiring managers to reply</h2>
+    <div class="grow">
+      <div class="pack">
+        <div class="doc" style="left:8%;top:12px;transform:rotate(-8deg)"><b>Hiring-post replies</b><i></i><i class="s"></i><i></i><i class="s"></i></div>
+        <div class="doc" style="left:30%;top:0;transform:rotate(2deg);z-index:2"><b>Cold messages to team leads</b><i></i><i class="s"></i><i></i><i></i><i class="s"></i></div>
+        <div class="doc" style="left:52%;top:16px;transform:rotate(9deg)"><b>Follow-ups that work</b><i></i><i class="s"></i><i></i></div>
+      </div>
+    </div>
+    <form class="stack" action="onboarding/" method="get"><label class="field"><input type="email" name="email" placeholder="you@email.com" aria-label="Email" /></label><button class="btn" type="submit">Send me the pack <svg><use href="#arrow" /></svg></button></form>
+    <div class="fine">Plus a weekly tip. Unsubscribe anytime.</div>
+  </aside>
+</div></section>
+
+<!-- ═══ 5 · Hiring manager finder -->
+<div class="label"><div class="frame"><b>CTA 5 · Who’s hiring at…</b> — type a company, see the people hiring (blurred) → sign up to unlock · ⚠️ sample people</div></div>
+<section class="hero"><div class="frame">
+  <div><div class="crumbs">Blog / <span>Outreach</span></div><h1>Hiring posts: the jobs that never reach the jobs tab</h1><p class="lead">Founders and team leads post “we’re hiring” long before a vacancy goes live.</p><div class="meta"><span class="au"><span class="av"><svg width="14" height="14"><use href="#tau" /></svg></span>Tau team</span><span>5 min read</span></div></div>
+  <aside class="slot light">
+    <span class="tag">Find the person, not the job post</span>
+    <h2>Who’s hiring at your dream company?</h2>
+    <div class="grow">
+      <label class="field"><span>Company</span><input value="Stripe" aria-label="Company" /></label>
+      <div class="people">
+        <div class="person"><img src="hero/dana-280.webp" alt="" /><span class="t"><b>Dana K.</b><span>Head of Design · posted “we’re hiring” 2d ago</span></span><span class="pill p-green">Hiring</span></div>
+        <div class="person"><img class="blur" src="hero/daniel-280.webp" alt="" /><span class="t blur"><b>Daniel M.</b><span>Engineering Manager · Payments</span></span><span class="pill p-violet">🔒</span></div>
+        <div class="person"><img class="blur" src="hero/maya-280.webp" alt="" /><span class="t blur"><b>Maya C.</b><span>Recruiter · Design & Research</span></span><span class="pill p-violet">🔒</span></div>
+      </div>
+    </div>
+    <a class="btn" href="onboarding/">Unlock and draft my message <svg><use href="#arrow" /></svg></a>
+  </aside>
+</div></section>
+
+<!-- ═══ 6 · Profile quiz -->
+<div class="label"><div class="frame"><b>CTA 6 · 2-minute check</b> — a short quiz, the first question already on the card → result + sign-up</div></div>
+<section class="hero"><div class="frame">
+  <div><div class="crumbs">Blog / <span>LinkedIn</span></div><h1>50 LinkedIn headline examples by role</h1><p class="lead">Your headline is your search ranking and your first impression.</p><div class="meta"><span class="au"><span class="av"><svg width="14" height="14"><use href="#tau" /></svg></span>Tau team</span><span>5 min read</span></div></div>
+  <aside class="slot grad">
+    <span class="tag">2-minute check</span>
+    <h2>Is your LinkedIn ready for recruiters?</h2>
+    <p class="sub">5 questions. Get your score and what to fix first.</p>
+    <div class="grow">
+      <div class="q">
+        <p>1. Does your headline say the role you want — not the one you have?</p>
+        <div class="opts"><button type="button">Yes, it’s my target role</button><button type="button">It’s my current title</button><button type="button">Not sure</button></div>
+        <div class="steps"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+    <a class="btn" href="onboarding/">Start the check <svg><use href="#arrow" /></svg></a>
+  </aside>
+</div></section>
+
+<!-- ═══ 7 · Autopilot -->
+<div class="label"><div class="frame"><b>CTA 7 · Autopilot</b> — the core product offer, straight: 20 applications a day</div></div>
+<section class="hero"><div class="frame">
+  <div><div class="crumbs">Blog / <span>AI</span></div><h1>How to boost your job search with AI</h1><p class="lead">AI can find roles, tailor your CV, write outreach and prep you for interviews.</p><div class="meta"><span class="au"><span class="av"><svg width="14" height="14"><use href="#tau" /></svg></span>Tau team</span><span>7 min read</span></div></div>
+  <aside class="slot grad">
+    <span class="tag"><svg width="13" height="13"><use href="#tau-w" /></svg> Tau for LinkedIn</span>
+    <h2>Apply to 20 jobs a day on autopilot</h2>
+    <div class="grow">
+      <div class="ap">
+        <div class="h"><span class="live"><i></i>Autopilot is on</span><span><b>17</b> of 20 today</span></div>
+        <div class="row"><span class="logo" style="background:#635BFF;width:26px;height:26px"><svg><use href="#lg-Stripe" /></svg></span><b>Product Designer · Stripe</b><span class="pill p-green">✓ Applied</span></div>
+        <div class="row"><span class="logo" style="background:#1ED760;width:26px;height:26px"><svg><use href="#lg-Spotify" /></svg></span><b>Data Analyst · Spotify</b><span class="pill p-green">✓ Applied</span></div>
+        <div class="row"><span class="logo" style="background:#5E6AD2;width:26px;height:26px"><svg><use href="#lg-Linear" /></svg></span><b>Design Engineer · Linear</b><span class="pill p-violet">Tailoring…</span></div>
+      </div>
+    </div>
+    <a class="btn" href="onboarding/">Launch my agent for free <svg><use href="#arrow" /></svg></a>
+    <div class="fine">Free trial · Cancel anytime</div>
+  </aside>
+</div></section>
+
+<!-- ═══ 8 · Interview practice -->
+<div class="label"><div class="frame"><b>CTA 8 · Practice the interview</b> — a mock interview chat, one question already asked → sign-up to answer</div></div>
+<section class="hero"><div class="frame">
+  <div><div class="crumbs">Blog / <span>Interviews</span></div><h1>How to answer “Tell me about yourself” (with examples)</h1><p class="lead">It’s the first question in almost every interview — and the easiest to get wrong.</p><div class="meta"><span class="au"><span class="av"><svg width="14" height="14"><use href="#tau" /></svg></span>Tau team</span><span>5 min read</span></div></div>
+  <aside class="slot soft">
+    <span class="tag">AI mock interview</span>
+    <h2>Practise it now — get feedback in seconds</h2>
+    <div class="grow">
+      <div class="chat">
+        <div class="bubble ai"><small>Interviewer · Stripe, Product Designer</small>Tell me about yourself.</div>
+        <div class="bubble me">I’m a product designer at a fintech, where I led the design system…</div>
+        <div class="bubble ai"><small>Feedback</small><span class="fb"><span class="pill p-green">✓ Clear present</span><span class="pill p-green">✓ One result</span><span class="pill p-violet">Add: why this role</span></span></div>
+      </div>
+    </div>
+    <a class="btn" href="onboarding/">Practise my answer <svg><use href="#arrow" /></svg></a>
+  </aside>
+</div></section>
+
+<footer>Tau · article hero, 8 CTA offers · 19 Oct 2026</footer>
+<script>
+/* 3 · calculator: ~25 min per tailored application */
+(() => { const r = document.querySelector("[data-range]"); if (!r) return; const a = document.querySelector("[data-apps]"), h = document.querySelector("[data-hours]");
+  const u = () => { a.textContent = r.value; h.textContent = Math.round((r.value * 25) / 60); }; r.addEventListener("input", u); u(); })();
+</script>
+</body>
+</html>
