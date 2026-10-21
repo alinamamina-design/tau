@@ -13,7 +13,7 @@
 <style>
   :root { --ink: #191918; --body: #2f2f2d; --meta: #73726e; --line: #ebebea; --warm: #f7f6f3; --violet: #6d5dfb; --violet-ink: #5644e6; --violet-bg: #f1efff; --serif: 'Source Serif 4', Georgia, serif; }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; } body { overflow-x: hidden; }
   body { margin: 0; background: #fff; color: var(--ink); font: 400 16px/1.5 Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; height: auto; display: block; }
@@ -103,6 +103,27 @@
   .pt { background: var(--violet-bg); color: var(--violet-ink); }
   .sal { font-size: 15px; font-weight: 600; letter-spacing: -.01em; color: var(--ink); }
 </style>
+<style id="bleed">
+  .bleed { position: relative; z-index: 8; display: block; border: 0; height: 600px; margin: 56px 0; }
+  @media (max-width: 1000px) { .bleed { height: 900px; } }
+</style>
+<style id="nhcss">
+  .wrap { grid-template-columns: minmax(0, 640px) !important; justify-content: center; padding-top: 72px !important; }
+  .nh { background: radial-gradient(70% 90% at 85% 40%, #efeaff 0%, rgba(239,234,255,0) 60%), #fff; border-bottom: 1px solid #ebebea; }
+  .nh-in { max-width: 1240px; margin: 0 auto; padding: 56px 24px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 64px; align-items: center; }
+  .nh-copy h1 { margin: 0; font-size: clamp(2.6rem, 4.8vw, 4.2rem); line-height: 1.02; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
+  .nh-g { background: linear-gradient(90deg, #2563eb, #6d5dfb 52%, #9333ea); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .nh-copy p { margin: 22px 0 0; max-width: 520px; font-size: 19px; line-height: 1.55; color: #73726e; }
+  .nh-btn { margin-top: 32px; display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 14px; background: #191918; color: #fff; font: 600 16px/1 Inter, sans-serif; box-shadow: 0 12px 26px -12px rgba(28,29,31,.6); transition: transform .2s; }
+  .nh-btn:hover { transform: translateY(-1px); }
+  .nh-side { padding: 8px 40px; }
+  .ph-feed .app svg { display: block; }
+  .nh-in { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr) !important; }
+  .nh-side { padding: 0 !important; }
+  .nh-vis { display: block; width: 100%; height: 480px; border: 0; background: transparent; transform: translateX(56px); }
+
+  @media (max-width: 900px) { .nh-vis { transform: none; } .nh-in { grid-template-columns: 1fr !important; } .nh-side { display: grid; justify-items: center; padding: 0; } }
+</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -123,33 +144,51 @@
   </defs>
 </svg>
 
-<header class="nav"><div class="in">
-  <a class="brand" href="./"><svg width="22" height="22"><use href="#tau" /></svg> Tau</a>
-  <nav class="mid"><a href="./">Product</a><a class="on" href="blog/">Blog</a><a href="./#pricing">Pricing</a></nav>
-  <div class="right"><a href="#">Log in</a><a class="btn" href="onboarding/">Start for free</a></div>
+<header class="glass-bar" data-dark="false" id="tnav"><div class="tn-in">
+  <a class="tn-brand" href="./" aria-label="Tau home"><svg viewBox="0 0 92 92" width="24" height="24" aria-hidden="true"><defs><linearGradient id="tn-g" gradientUnits="userSpaceOnUse" x1="8" y1="0" x2="84" y2="0"><stop offset="0" stop-color="#2563EB" class="s0" /><stop offset=".52" stop-color="#6D5DFB" class="s1" /><stop offset="1" stop-color="#9333EA" class="s2" /></linearGradient></defs><path d="M8 17H84V30H46V59C46 64 50 68 55 68H59V81H55C43 81 33 71 33 59V30H8Z" fill="url(#tn-g)" /></svg><span>Tau</span></a>
+  <div class="tn-r"><a class="glass-link tn-hide" href="blog/">Blog</a><a class="glass-ghost tn-hide" href="#">Sign in</a><a class="glass-cta" href="onboarding/">Start for free</a></div>
 </div></header>
+<style>
+  #tnav { position: sticky; top: 0; z-index: 50; font-family: Inter, system-ui, sans-serif; letter-spacing: normal; color: #1c1d1f; background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid rgba(15,23,42,.06); box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 8px 24px -18px rgba(15,23,42,.25); transition: background .3s, color .3s; }
+  #tnav .tn-in { max-width: 1280px; margin: 0 auto; height: 60px; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
+  #tnav .tn-brand { display: flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; } #tnav .tn-brand span { font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
+  #tnav .tn-r { display: flex; align-items: center; gap: 8px; }
+  #tnav .tn-r a { display: flex; align-items: center; height: 32px; padding: 0 12px; font-size: 14px; font-weight: 500; line-height: 1; text-decoration: none; border-radius: 10px; transition: background .2s, color .2s; }
+  #tnav .glass-link { color: #6f7277; } #tnav .glass-link:hover { color: #1c1d1f; }
+  #tnav .glass-ghost { color: inherit; border: 1px solid rgba(15,23,42,.1); background: rgba(255,255,255,.4); } #tnav .glass-ghost:hover { background: rgba(255,255,255,.8); }
+  #tnav .glass-cta { background: #1c1d1f; color: #fff; } #tnav .glass-cta:hover { background: #000; }
+  #tnav[data-dark="true"] { color: #fff; background: rgba(17,17,17,.45); border-bottom-color: rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 8px 24px -18px rgba(0,0,0,.6); }
+  #tnav[data-dark="true"] .glass-link { color: rgba(255,255,255,.6); } #tnav[data-dark="true"] .glass-link:hover { color: #fff; }
+  #tnav[data-dark="true"] .glass-ghost { border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.04); }
+  #tnav[data-dark="true"] .glass-cta { background: #fff; color: #1c1d1f; }
+  #tnav[data-dark="true"] .s0 { stop-color: #60A5FA; } #tnav[data-dark="true"] .s1 { stop-color: #A5B4FC; } #tnav[data-dark="true"] .s2 { stop-color: #C084FC; }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { #tnav { background: rgba(255,255,255,.94); } #tnav[data-dark="true"] { background: rgba(17,17,17,.94); } }
+  @media (max-width: 639px) { #tnav .tn-in { padding: 0 20px; } #tnav .tn-hide { display: none; } }
+</style>
+<script>
+  // dark glass while the bar sits over a dark block (same rule as the site's GlassHeader)
+  (() => { const bar = document.getElementById('tnav'); let raf = 0;
+    const dark = () => [...document.querySelectorAll('[data-tone="dark"], .band.dark, .ts.dark, .dark-band')].some(el => { const r = el.getBoundingClientRect(); return r.top <= 30 && r.bottom > 30; });
+    const check = () => { raf = 0; bar.dataset.dark = dark(); };
+    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(check); }, { passive: true }); addEventListener('resize', check); check(); })();
+</script>
 
 <!-- ═══ ARTICLE -->
+<section class="nh"><div class="nh-in">
+  <div class="nh-copy">
+    <h1>Claude skills for job search: <span class="nh-g">18 skills</span>, free pack</h1>
+    <p>A job search operating system for Claude: 18 skills across six stages, from your profile to the offer.</p>
+    <a class="nh-btn" href="onboarding/">Launch my agent <svg width="16" height="16"><use href="#arrow" /></svg></a>
+  </div>
+  <div class="nh-side"><iframe class="nh-vis" src="cta-s-easyapply.html?bare" title="Tau" scrolling="no"></iframe></div>
+</div></section>
 <div class="wrap">
-  <a class="back" href="blog/">← All posts</a>
-  <article>
-    <p class="pub">Published October 20, 2026 in <a href="blog/">Guides</a></p>
-    <h1>Claude skills for job search: 18 skills, free pack</h1>
-    <div class="by"><span class="av"><svg width="17" height="17"><use href="#tau" /></svg></span>By the Tau team</div>
-    <div class="sk">Share this post</div>
-    <div class="share"><a href="#" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.3L5.3 21H2.2l7.2-8.3L1.8 3h6.3l4.4 5.8zm-1.1 16.2h1.7L7.2 4.7H5.4z"/></svg></a><a href="#" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 2H3.6C2.7 2 2 2.7 2 3.6v16.8c0 .9.7 1.6 1.6 1.6h16.8c.9 0 1.6-.7 1.6-1.6V3.6c0-.9-.7-1.6-1.6-1.6zM8 19H5V9.5h3zM6.5 8.2a1.7 1.7 0 1 1 0-3.5 1.7 1.7 0 0 1 0 3.5zM19 19h-3v-4.6c0-1.1 0-2.5-1.5-2.5S12.7 13 12.7 14.3V19h-3V9.5h2.8v1.3h.1c.4-.7 1.4-1.5 2.8-1.5 3 0 3.6 2 3.6 4.6z"/></svg></a><a href="#" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></a></div>
-    <div class="rule"></div>
+    <article>
     <div class="art">
       <p>18 standalone Claude skills for the job search, grouped into six practical stages. Each skill is a small, uploadable workflow that teaches Claude how to do one high-value job search task the same way every time — with a method, not a one-off prompt.</p>
       <p>Together, they work like an operating system for the whole search: decide what you’re selling, find the right roles first, make every application fit, reach the person who’s hiring, prepare for the interview and negotiate the offer. They’re built for designers, engineers, analysts, PMs and anyone who wants Claude to behave less like a chatbot and more like a sharp career coach: specific before generic, evidence-based before flattering, and ready to send before polished.</p>
       <p>Each skill is one folder with a single <code>SKILL.md</code> file. Add it in Claude’s Skills settings, then name the skill in your prompt — or just describe the task, and Claude picks the right skill on its own.</p>
-      <figure class="fig"><div class="pane"><div class="ap">
-        <div class="ap-h"><span class="lv"><i></i>Autopilot is on</span><span><b>17</b> of 20 today</span></div>
-        <div class="ap-r"><span class="logo" style="background:#635BFF"><svg><use href="#lg-Stripe" /></svg></span><span class="t"><b>Product Designer</b><span>Stripe · Berlin · €185k</span></span><span class="pa">Applied</span></div>
-        <div class="ap-r"><span class="logo" style="background:#1ED760"><svg><use href="#lg-Spotify" /></svg></span><span class="t"><b>Senior Designer</b><span>Spotify · Remote · €170k</span></span><span class="pa">Applied</span></div>
-        <div class="ap-r"><span class="logo" style="background:#5E6AD2"><svg><use href="#lg-Linear" /></svg></span><span class="t"><b>Design Engineer</b><span>Linear · London · €210k</span></span><span class="pt">Tailoring CV…</span></div>
-      </div></div><figcaption>The same skills, run by your agent every day.</figcaption></figure>
-      <div class="call"><img src="icons/glass/sm/book.webp" width="240" height="240" loading="lazy" decoding="async" alt="" /><div class="tx"><b>Get all 18 skills</b>One zip, one folder per skill. Free.<br /><a class="btn dk" href="onboarding/">Get the free pack <svg width="14" height="14"><use href="#arrow" /></svg></a></div></div>
+      <iframe class="bleed" data-tone="dark" src="cta-b-chat.html" title="Tau" loading="lazy" scrolling="no"></iframe>
       <h2 id="skills">The 18 skills you get</h2>
       <p>The pack is grouped into six stages. They run in the order a real job search does — position first, negotiate last — but every skill is also useful on its own. Most people start with one stage, the one that’s hurting right now.</p>
       <h2 id="d1">Profile & Positioning</h2>
@@ -161,20 +200,14 @@
       <h2 id="d3">Applications</h2>
       <p>Use these once you’ve picked a role. Every application should read like it was written for that job, because it was. The rule is simple: the posting’s language, your real experience, nothing invented.</p>
       <p><b>CV Tailor</b> rewrites your CV around the role’s keywords and returns a clean PDF that clears the ATS and survives the six-second skim. <b>Cover Letter</b> writes three short paragraphs that open with the company, not with you, in under ten minutes. <b>Application Answers</b> drafts the open questions on long forms in your voice, ready to paste and edit.</p>
-      <div class="call v"><img src="icons/glass/sm/apply.webp" width="240" height="240" loading="lazy" decoding="async" alt="" /><div class="tx"><b>Apply to 20 jobs a day on autopilot</b>Tau finds roles, tailors your CV and applies for you<br /><a class="btn" href="onboarding/">Launch my agent <svg width="14" height="14"><use href="#arrow" /></svg></a></div></div>
+      <iframe class="bleed" src="cta-b-search.html" title="Tau" loading="lazy" scrolling="no"></iframe>
       <h2 id="d4">Outreach & Network</h2>
       <p>Use these when applying alone isn’t enough. A message to the right person moves an application from the pile to a conversation, as long as it’s short, specific and sent at the right time.</p>
       <p><b>Hiring Manager Finder</b> identifies who owns the role: the hiring manager, the recruiter and one peer worth contacting. <b>Outreach Message</b> writes a three-sentence note under 300 characters that talks about their team, not your CV. <b>Follow-up</b> tells you when to chase and writes the follow-up: polite, short and easy to answer.</p>
       <h2 id="d5">Interviews</h2>
       <p>Use these once a recruiter replies. Preparation beats talent in most interview loops, and these skills make preparation repeatable: research first, stories second, practice last.</p>
       <p><b>Interview Prep</b> builds a one-page brief on the company, the role, the interviewers and the questions you’re most likely to get. <b>Story Bank</b> turns your experience into six STAR stories and maps each one to the behavioural questions it answers. <b>Mock Interview</b> runs a live practice round and gives feedback after every answer: structure, length, evidence and the one thing to fix.</p>
-      <figure class="fig"><div class="pane"><div class="ap">
-        <div class="ap-h"><span class="lv"><i></i>Role Scan · 4 new in the last hour</span><span>09:00</span></div>
-        <div class="ap-r"><span class="logo" style="background:#FF5A5F"><svg><use href="#lg-Airbnb" /></svg></span><span class="t"><b>Senior Product Designer</b><span>Airbnb · Remote</span></span><b class="sal">€180k</b></div>
-        <div class="ap-r"><span class="logo" style="background:#F24E1E"><svg><use href="#lg-Figma" /></svg></span><span class="t"><b>Product Designer, Editor</b><span>Figma · London</span></span><b class="sal">£165k</b></div>
-        <div class="ap-r"><span class="logo" style="background:#191919"><svg><use href="#lg-Revolut" /></svg></span><span class="t"><b>Lead Designer</b><span>Revolut · Berlin</span></span><b class="sal">€190k</b></div>
-        <div class="ap-r"><span class="logo" style="background:#36A18B"><svg><use href="#lg-N26" /></svg></span><span class="t"><b>UX Researcher</b><span>N26 · Berlin</span></span><b class="sal">€120k</b></div>
-      </div></div><figcaption>Role Scan on autopilot: new roles every hour, with the salary up front.</figcaption></figure>
+      <iframe class="bleed" data-tone="dark" src="cta-b-map.html" title="Tau" loading="lazy" scrolling="no"></iframe>
       <h2 id="d6">Offer & Negotiation</h2>
       <p>Use these when an offer is close. The first number is rarely the best one, and the people who ask for more usually get some of it.</p>
       <p><b>Salary Research</b> builds a realistic range for the role, level and city, with sources and a target number you can defend. <b>Negotiation Script</b> writes the call script and the counter email, with fallbacks for every likely answer. <b>Offer Comparison</b> puts competing offers side by side, across pay, growth, risk and fit, and ends with a clear recommendation.</p>
@@ -194,6 +227,7 @@
       <h2 id="quality">The quality bar</h2>
       <p>Every skill pushes Claude toward output that a good recruiter or career coach would sign off on before it leaves your hands.</p>
       <ul class="bar"><li>Specific to this role</li><li>True to your real experience</li><li>Evidence over adjectives</li><li>A number in every claim</li><li>Readable in 6 seconds</li><li>ATS-safe by default</li><li>In your voice, not a template</li><li>Short enough to be read</li><li>One clear ask</li><li>Honest about gaps</li><li>Ready to send, not to edit</li><li>Reviewed by you before it goes</li></ul>
+      <iframe class="bleed" src="cta-b-list.html" title="Tau" loading="lazy" scrolling="no"></iframe>
       <h2 id="faq">Frequently asked questions</h2>
       <h3>What are Claude skills for job search?</h3>
       <p>A Claude skill is a reusable instruction file that teaches Claude one method and the standard its output has to meet. A job search skill encodes one piece of the craft — tailoring a CV, scoring a role, writing outreach — so it runs the same way every time instead of being re-explained in a new prompt.</p>
@@ -212,18 +246,25 @@
 </div>
 
 <!-- ═══ BOTTOM CTA -->
-<section class="end">
-  <div class="ics"><img src="icons/glass/sm/compass.webp" width="240" height="240" loading="lazy" decoding="async" alt="" /><img src="icons/glass/sm/apply.webp" width="240" height="240" loading="lazy" decoding="async" alt="" /><img src="icons/glass/sm/suitcase.webp" width="240" height="240" loading="lazy" decoding="async" alt="" /></div>
-  <h2>Your next offer is already on LinkedIn</h2>
-  <p>Your agent applies to 20 jobs a day while you prepare</p>
-  <a class="btn" href="onboarding/">Launch my agent for free <svg width="14" height="14"><use href="#arrow" /></svg></a>
-</section>
+<iframe class="bleed" src="cta-h-end.html" title="Tau" style="margin-bottom:0" loading="lazy" scrolling="no"></iframe>
 
-<!-- ═══ KEEP READING -->
-<section class="more">
-  <h2>Keep reading</h2>
-  <div class="mg"><a href="article-resume.html"><div class="ph"><img src="icons/glass/sm/paper.webp" width="240" height="240" loading="lazy" decoding="async" alt="" /></div><b>How to write a resume recruiters actually read</b><span>What recruiters check in the first seconds, and a structure that survives the skim and the ATS.</span></a><a href="blog/tell-me-about-yourself/"><div class="ph"><img src="icons/glass/sm/microphone.webp" width="240" height="240" loading="lazy" decoding="async" alt="" /></div><b>How to answer “Tell me about yourself”</b><span>A 60-second structure for the first question in almost every interview.</span></a><a href="blog/negotiate-job-offer/"><div class="ph"><img src="icons/glass/sm/suitcase.webp" width="240" height="240" loading="lazy" decoding="async" alt="" /></div><b>How to negotiate a job offer</b><span>Scripts that ask for more without risking the offer.</span></a></div>
-</section>
-<footer><span>© 2026 Tau</span><span>Blog · Privacy · Terms</span></footer>
+<script id="bleedjs">
+  // full-bleed CTA bands: stretch each iframe to the viewport width and to its band's height
+  (() => {
+    const fs = [...document.querySelectorAll('iframe.bleed')];
+    const place = () => fs.forEach(f => { const W = document.documentElement.clientWidth, x = f.parentElement.getBoundingClientRect().left; f.style.width = W + 'px'; f.style.marginLeft = -x + 'px';
+      try { const s = f.contentDocument && f.contentDocument.querySelector('body > section'); if (s) f.style.height = s.offsetHeight + 'px'; } catch (e) {} });
+    fs.forEach(f => f.addEventListener('load', () => { place(); setTimeout(place, 600); }));
+    addEventListener('resize', place); place();
+  })();
+</script>
+<script id="nhjs">
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  const onScreen = (el, start) => { let on = false, running = false; new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on && !running) { running = true; start(() => on).finally(() => running = false); } }).observe(el); };
+  const TAU = '<span class="app"><svg width="18" height="18"><use href="#tau-w" /></svg></span>';
+})();
+</script>
 </body>
 </html>

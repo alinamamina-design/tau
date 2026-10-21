@@ -275,7 +275,9 @@
   .ea { position: relative; z-index: 1; width: min(420px, 100%); height: 330px; }
   .ea-stack { position: absolute; inset: 0; }
   .ja { position: absolute; left: 0; right: 0; top: 0; padding: 20px; border-radius: 18px; background: #fff; border: 1px solid var(--line-2); box-shadow: 0 30px 60px -30px rgba(30,30,80,.45); transition: transform .6s cubic-bezier(.5,0,.2,1), opacity .6s; }
-  .ja.back1 { transform: translateY(16px) scale(.95); opacity: .7; } .ja.back2 { transform: translateY(32px) scale(.9); opacity: .4; }
+  .ja.back1 { transform: translateY(16px) scale(.95); background: #f6f6f9; } .ja.back2 { transform: translateY(32px) scale(.9); background: #efeff4; }
+  .ja.back1 > *, .ja.back2 > * { opacity: .35; }
+  .ea { z-index: 2 !important; }
   .ja.out { transform: translate(-120%, -10px) rotate(-8deg); opacity: 0; }
   .ja.enter { transform: translateY(48px) scale(.85); opacity: 0; }
   .ja-h { display: flex; align-items: center; gap: 12px; }
@@ -292,52 +294,6 @@
   .ea-cur > svg { width: 24px; height: 24px; fill: var(--ink); stroke: #fff; stroke-width: 1.4; filter: drop-shadow(0 3px 5px rgba(0,0,0,.25)); }
   .ea-cur span { margin-top: 18px; display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 999px; background: var(--violet); color: #fff; font-size: 11px; font-weight: 600; }
   @media (prefers-reduced-motion: reduce) {  .cur { animation: none; } }
-</style>
-<style id="agcss">
-  /* a chat */
-  .ag-chat { position: relative; z-index: 1; width: 380px; border-radius: 18px; background: #18191d; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 40px 80px -40px rgba(0,0,0,.8); overflow: hidden; }
-  .ag-ch { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.08); font-size: 13.5px; }
-  .ag-av { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(140deg, #2563eb, #9333ea); }
-  .ag-live { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #22a35a; box-shadow: 0 0 0 4px rgba(34,163,90,.2); }
-  .ag-feed { display: flex; flex-direction: column; gap: 8px; padding: 14px; height: 300px; justify-content: flex-end; overflow: hidden; }
-  .ag-feed > * { flex-shrink: 0; }
-  .ag-b { max-width: 82%; padding: 9px 12px; border-radius: 14px; font-size: 13.5px; line-height: 1.4; animation: rin .4s cubic-bezier(.2,.8,.2,1) both; }
-  .ag-b.ag-me { align-self: flex-end; background: var(--violet); color: #fff; border-bottom-right-radius: 4px; }
-  .ag-b.ag-bot { align-self: flex-start; background: rgba(255,255,255,.08); color: #e6e6ea; border-bottom-left-radius: 4px; }
-  .ag-dots { display: inline-flex; gap: 4px; } .ag-dots i { width: 6px; height: 6px; border-radius: 50%; background: #a1a4a9; animation: agdot 1s infinite; } .ag-dots i:nth-child(2) { animation-delay: .15s; } .ag-dots i:nth-child(3) { animation-delay: .3s; }
-  @keyframes agdot { 0%, 100% { opacity: .3; transform: none; } 50% { opacity: 1; transform: translateY(-3px); } }
-  .ag-jc { align-self: flex-start; width: 86%; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background: #fff; color: var(--ink); font-size: 13px; animation: rin .4s cubic-bezier(.2,.8,.2,1) both; }
-  .ag-jc .logo { width: 28px; height: 28px; border-radius: 8px; } .ag-jc > span:not(.logo) { flex: 1; min-width: 0; line-height: 1.25; } .ag-jc b { display: block; font-weight: 600; } .ag-jc em { font-style: normal; font-size: 12px; color: var(--violet-ink); font-weight: 700; }
-  .ag-jc i { flex: none; font-style: normal; padding: 2px 7px; border-radius: 6px; background: var(--green-bg); color: var(--green); font-size: 11px; font-weight: 700; }
-  /* b cluster */
-  .gx-cl { position: relative; z-index: 1; width: 440px; height: 380px; }
-  .gx-i { position: absolute; width: var(--w); transform: translate(-50%, -50%); animation: gxf 6s var(--d) ease-in-out infinite; }
-  .gx-i img { width: 100%; height: auto; filter: drop-shadow(0 18px 26px rgba(0,0,0,.55)); }
-  .gx-i.z0 { z-index: 3; } .gx-i.z0::before { content: ""; position: absolute; inset: -30%; border-radius: 50%; background: radial-gradient(closest-side, rgba(109,93,251,.5), transparent); z-index: -1; }
-  .gx-i.z1 { z-index: 2; } .gx-i.z2 { z-index: 1; opacity: .85; filter: blur(.4px); } .gx-i.z3 { opacity: .55; filter: blur(1.4px); }
-  @keyframes gxf { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: 0 -12px; rotate: 3deg; } }
-  .gx-cl[data-p] .gx-i { transition: transform .4s ease-out; }
-  /* c carousel (positioned by JS: depth → scale, height, blur) */
-  .gx-car { position: relative; z-index: 1; width: 460px; height: 340px; }
-  .gx-ring { position: absolute; inset: 0; }
-  .gx-c { position: absolute; left: 50%; top: 40%; width: 112px; height: 112px; margin: -56px; will-change: transform; }
-  .gx-c img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 16px 22px rgba(0,0,0,.55)); }
-  .gx-floor { position: absolute; left: 50%; bottom: 34px; width: 440px; height: 80px; margin-left: -220px; border-radius: 50%; background: radial-gradient(closest-side, rgba(109,93,251,.35), transparent); filter: blur(6px); }
-  /* job chips in the cluster */
-  .gx-job { display: flex; align-items: center; gap: 8px; padding: 7px 12px 7px 7px; border-radius: 12px; background: #fff; color: var(--ink); font-size: 12.5px; white-space: nowrap; box-shadow: 0 18px 34px -16px rgba(0,0,0,.8); z-index: 4 !important; }
-  .gx-job .logo { width: 26px; height: 26px; border-radius: 7px; } .gx-job > span:not(.logo) { display: grid; line-height: 1.2; } .gx-job b { font-weight: 600; } .gx-job em { font-style: normal; font-weight: 700; color: var(--violet-ink); }
-  .gx-job > i { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #22a35a; color: #fff; font-style: normal; font-size: 10px; font-weight: 700; opacity: 0; transform: scale(.4); transition: opacity .3s, transform .3s cubic-bezier(.2,1.4,.4,1); }
-  .gx-job.ok > i { opacity: 1; transform: none; }
-  /* job cards on the carousel */
-  .gx-cj { display: grid; place-items: center; }
-  .gx-jc { width: 150px; padding: 14px; border-radius: 16px; background: #fff; color: var(--ink); display: grid; justify-items: start; text-align: left; box-shadow: 0 18px 34px -16px rgba(0,0,0,.8); }
-  .gx-jc .logo { width: 30px; height: 30px; border-radius: 8px; margin-bottom: 12px; }
-  .gx-jc b { width: 100%; font-size: 13px; line-height: 1.25; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .gx-jc span { font-size: 12px; line-height: 1.3; color: var(--meta); }
-  .gx-jc em { margin-top: 8px; font-style: normal; font-weight: 800; color: var(--violet-ink); font-size: 16px; line-height: 1; letter-spacing: -.02em; }
-  .gx-jc i { margin-top: 12px; font-style: normal; padding: 3px 8px; border-radius: 6px; background: var(--green-bg); color: var(--green); font-size: 11px; font-weight: 700; line-height: 1.2; }
-  @media (prefers-reduced-motion: reduce) { .gx-i { animation: none; } }
-  @media (max-width: 760px) { .ag-chat, .ag-cal { width: 100%; } .gx-cl, .gx-car { transform: scale(.78); } }
 </style>
 <style id="v7css">
   /* glass keyword icon — same look as CTA 07 */
@@ -404,6 +360,52 @@
   .g7d.list .gi.g7r i { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #22a35a; color: #fff; font-style: normal; font-size: 10px; font-weight: 700; }
   @media (prefers-reduced-motion: reduce) { .g7-orbit .gi img, .g7-mid img, .gi.g7r .gi-in, .g7-track i { animation: none; } }
   @media (max-width: 760px) { .g7a, .g7c { transform: scale(.82); } .g7b, .g7d { transform: scale(.74); } }
+</style>
+<style id="agcss">
+  /* a chat */
+  .ag-chat { position: relative; z-index: 1; width: 380px; border-radius: 18px; background: #18191d; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 40px 80px -40px rgba(0,0,0,.8); overflow: hidden; }
+  .ag-ch { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.08); font-size: 13.5px; }
+  .ag-av { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(140deg, #2563eb, #9333ea); }
+  .ag-live { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #22a35a; box-shadow: 0 0 0 4px rgba(34,163,90,.2); }
+  .ag-feed { display: flex; flex-direction: column; gap: 8px; padding: 14px; height: 300px; justify-content: flex-end; overflow: hidden; }
+  .ag-feed > * { flex-shrink: 0; }
+  .ag-b { max-width: 82%; padding: 9px 12px; border-radius: 14px; font-size: 13.5px; line-height: 1.4; animation: rin .4s cubic-bezier(.2,.8,.2,1) both; }
+  .ag-b.ag-me { align-self: flex-end; background: var(--violet); color: #fff; border-bottom-right-radius: 4px; }
+  .ag-b.ag-bot { align-self: flex-start; background: rgba(255,255,255,.08); color: #e6e6ea; border-bottom-left-radius: 4px; }
+  .ag-dots { display: inline-flex; gap: 4px; } .ag-dots i { width: 6px; height: 6px; border-radius: 50%; background: #a1a4a9; animation: agdot 1s infinite; } .ag-dots i:nth-child(2) { animation-delay: .15s; } .ag-dots i:nth-child(3) { animation-delay: .3s; }
+  @keyframes agdot { 0%, 100% { opacity: .3; transform: none; } 50% { opacity: 1; transform: translateY(-3px); } }
+  .ag-jc { align-self: flex-start; width: 86%; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background: #fff; color: var(--ink); font-size: 13px; animation: rin .4s cubic-bezier(.2,.8,.2,1) both; }
+  .ag-jc .logo { width: 28px; height: 28px; border-radius: 8px; } .ag-jc > span:not(.logo) { flex: 1; min-width: 0; line-height: 1.25; } .ag-jc b { display: block; font-weight: 600; } .ag-jc em { font-style: normal; font-size: 12px; color: var(--violet-ink); font-weight: 700; }
+  .ag-jc i { flex: none; font-style: normal; padding: 2px 7px; border-radius: 6px; background: var(--green-bg); color: var(--green); font-size: 11px; font-weight: 700; }
+  /* b cluster */
+  .gx-cl { position: relative; z-index: 1; width: 440px; height: 380px; }
+  .gx-i { position: absolute; width: var(--w); transform: translate(-50%, -50%); animation: gxf 6s var(--d) ease-in-out infinite; }
+  .gx-i img { width: 100%; height: auto; filter: drop-shadow(0 18px 26px rgba(0,0,0,.55)); }
+  .gx-i.z0 { z-index: 3; } .gx-i.z0::before { content: ""; position: absolute; inset: -30%; border-radius: 50%; background: radial-gradient(closest-side, rgba(109,93,251,.5), transparent); z-index: -1; }
+  .gx-i.z1 { z-index: 2; } .gx-i.z2 { z-index: 1; opacity: .85; filter: blur(.4px); } .gx-i.z3 { opacity: .55; filter: blur(1.4px); }
+  @keyframes gxf { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: 0 -12px; rotate: 3deg; } }
+  .gx-cl[data-p] .gx-i { transition: transform .4s ease-out; }
+  /* c carousel (positioned by JS: depth → scale, height, blur) */
+  .gx-car { position: relative; z-index: 1; width: 460px; height: 340px; }
+  .gx-ring { position: absolute; inset: 0; }
+  .gx-c { position: absolute; left: 50%; top: 40%; width: 112px; height: 112px; margin: -56px; will-change: transform; }
+  .gx-c img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 16px 22px rgba(0,0,0,.55)); }
+  .gx-floor { position: absolute; left: 50%; bottom: 34px; width: 440px; height: 80px; margin-left: -220px; border-radius: 50%; background: radial-gradient(closest-side, rgba(109,93,251,.35), transparent); filter: blur(6px); }
+  /* job chips in the cluster */
+  .gx-job { display: flex; align-items: center; gap: 8px; padding: 7px 12px 7px 7px; border-radius: 12px; background: #fff; color: var(--ink); font-size: 12.5px; white-space: nowrap; box-shadow: 0 18px 34px -16px rgba(0,0,0,.8); z-index: 4 !important; }
+  .gx-job .logo { width: 26px; height: 26px; border-radius: 7px; } .gx-job > span:not(.logo) { display: grid; line-height: 1.2; } .gx-job b { font-weight: 600; } .gx-job em { font-style: normal; font-weight: 700; color: var(--violet-ink); }
+  .gx-job > i { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #22a35a; color: #fff; font-style: normal; font-size: 10px; font-weight: 700; opacity: 0; transform: scale(.4); transition: opacity .3s, transform .3s cubic-bezier(.2,1.4,.4,1); }
+  .gx-job.ok > i { opacity: 1; transform: none; }
+  /* job cards on the carousel */
+  .gx-cj { display: grid; place-items: center; }
+  .gx-jc { width: 150px; padding: 14px; border-radius: 16px; background: #fff; color: var(--ink); display: grid; justify-items: start; text-align: left; box-shadow: 0 18px 34px -16px rgba(0,0,0,.8); }
+  .gx-jc .logo { width: 30px; height: 30px; border-radius: 8px; margin-bottom: 12px; }
+  .gx-jc b { width: 100%; font-size: 13px; line-height: 1.25; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .gx-jc span { font-size: 12px; line-height: 1.3; color: var(--meta); }
+  .gx-jc em { margin-top: 8px; font-style: normal; font-weight: 800; color: var(--violet-ink); font-size: 16px; line-height: 1; letter-spacing: -.02em; }
+  .gx-jc i { margin-top: 12px; font-style: normal; padding: 3px 8px; border-radius: 6px; background: var(--green-bg); color: var(--green); font-size: 11px; font-weight: 700; line-height: 1.2; }
+  @media (prefers-reduced-motion: reduce) { .gx-i { animation: none; } }
+  @media (max-width: 760px) { .ag-chat, .ag-cal { width: 100%; } .gx-cl, .gx-car { transform: scale(.78); } }
 </style>
 </head>
 <body>
@@ -561,6 +563,8 @@
 
 
 
+
+
 <!-- ═══ MORE — saved bands from the articles, embedded as-is (cta-h-*.html) -->
 <div class="label"><div class="frame"><b>05</b></div></div>
 <iframe class="emb" src="cta-h-first.html" title="CTA" loading="lazy" scrolling="no"></iframe>
@@ -622,7 +626,13 @@
   </div>
 </div></section>
 <!-- ═══ AG VARIANTS END -->
+<!-- ═══ FROM HERO START -->
 <div class="label"><div class="frame"><b>10</b></div></div>
+<iframe class="emb" src="cta-h-hero1.html" title="CTA" loading="lazy" scrolling="no"></iframe>
+<div class="label"><div class="frame"><b>11</b></div></div>
+<iframe class="emb" src="cta-h-hero4.html" title="CTA" loading="lazy" scrolling="no"></iframe>
+<!-- ═══ FROM HERO END -->
+<div class="label"><div class="frame"><b>12</b></div></div>
 <iframe class="emb" src="cta-h-end.html" title="CTA" loading="lazy" scrolling="no"></iframe>
 <style>.emb{display:block;width:100%;height:560px;border:0}</style>
 <script>
@@ -758,62 +768,6 @@
   });
 })();
 </script>
-<script id="agjs">
-(() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  const onScreen = (el, start) => { let on = false, running = false; new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on && !running) { running = true; start(() => on).finally(() => running = false); } }).observe(el); };
-  const LC = {"Stripe": "#635BFF", "Spotify": "#1ED760", "Figma": "#F24E1E", "Airbnb": "#FF5A5F", "Linear": "#5E6AD2", "N26": "#48AC98", "Revolut": "#191C1F", "Notion": "#000"};
-  const lg = (n) => `<span class="logo" style="background:${LC[n]}"><svg><use href="#lg-${n}" /></svg></span>`;
-
-  // a · chat: your request → the agent types → it lists the roles it applied to
-  document.querySelectorAll('[data-chat]').forEach(box => {
-    const feed = box.querySelector('[data-feed]');
-    const add = (h) => { feed.insertAdjacentHTML('beforeend', h); while (feed.scrollHeight > feed.clientHeight + 2 && feed.children.length > 1) feed.firstElementChild.remove(); };
-    const jc = (n, t, sal) => `<div class="ag-jc">${lg(n)}<span><b>${t}</b><em>${n} · ${sal}</em></span><i>Applied</i></div>`;
-    const JOBS = [['Stripe', 'Product Designer', '€185k'], ['N26', 'Senior Designer', '€160k'], ['Linear', 'Design Engineer', '€210k']];
-    if (reduce) { add('<div class="ag-b ag-me">Product design roles in Berlin, €150k+</div>'); add('<div class="ag-b ag-bot">Found 12. Applied to the best 3:</div>'); JOBS.forEach(j => add(jc(...j))); return; }
-    onScreen(box, async (alive) => { while (alive()) {
-      feed.innerHTML = ''; await wait(500);
-      add('<div class="ag-b ag-me">Product design roles in Berlin, €150k+</div>'); await wait(700);
-      add('<div class="ag-b ag-bot" data-typing><span class="ag-dots"><i></i><i></i><i></i></span></div>'); await wait(1200);
-      feed.querySelector('[data-typing]')?.remove(); add('<div class="ag-b ag-bot">Found 12. Applied to the best 3:</div>'); await wait(500);
-      for (const j of JOBS) { add(jc(...j)); await wait(600); }
-      await wait(2800);
-    } });
-  });
-
-  // b · cluster: the icons drift a little towards the pointer, each by its own depth
-  document.querySelectorAll('[data-gxcl]').forEach(box => {
-    if (reduce) return;
-    const items = [...box.querySelectorAll('.gx-i')], depth = { z0: 6, z1: 14, z2: 22, z3: 30 };
-    const stage = box.closest('.stage'); box.dataset.p = '1';
-    stage.addEventListener('pointermove', e => { const r = stage.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5;
-      items.forEach(it => { const k = depth[[...it.classList].find(c => c in depth)]; it.style.transform = `translate(calc(-50% + ${-dx * k}px), calc(-50% + ${-dy * k}px))`; }); });
-    stage.addEventListener('pointerleave', () => items.forEach(it => it.style.transform = ''));
-  });
-
-  // c · carousel: icons ride an ellipse; the front one is big and sharp, the back ones small and soft
-  document.querySelectorAll('[data-gxring]').forEach(ring => {
-    const items = [...ring.querySelectorAll('.gx-c')], N = items.length;
-    let on = false, loop = false, t0 = performance.now();
-    const place = (t) => { const W = ring.clientWidth, a0 = t / 4200;
-      items.forEach((it, i) => { const a = a0 + i / N * Math.PI * 2, z = Math.cos(a), x = Math.sin(a) * W * .46, y = -z * 64, sc = .5 + (z + 1) * .34;
-        it.style.transform = `translate(${x}px, ${-y}px) scale(${sc})`; it.style.zIndex = Math.round((z + 1) * 50); it.style.opacity = .45 + (z + 1) * .275; it.style.filter = `blur(${Math.max(0, -z) * 1.6}px)`; }); };
-    place(0);
-    if (reduce) return;
-    const step = (now) => { place(now - t0); if (on) requestAnimationFrame(step); else loop = false; };
-    new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on && !loop) { loop = true; requestAnimationFrame(step); } }).observe(ring);
-  });
-
-  // b · the job chips get their ✓ one after another
-  document.querySelectorAll('[data-gxcl]').forEach(box => {
-    const jobs = [...box.querySelectorAll('[data-job]')];
-    if (reduce) { jobs.forEach(j => j.classList.add('ok')); return; }
-    onScreen(box, async (alive) => { while (alive()) { jobs.forEach(j => j.classList.remove('ok')); await wait(900); for (const j of jobs) { j.classList.add('ok'); await wait(900); } await wait(2400); } });
-  });
-})();
-</script>
 <script id="v7js">
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -877,6 +831,62 @@
       for (const g of gis) { g.classList.add('on'); await wait(260); }
       await wait(2600);
     } });
+  });
+})();
+</script>
+<script id="agjs">
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  const onScreen = (el, start) => { let on = false, running = false; new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on && !running) { running = true; start(() => on).finally(() => running = false); } }).observe(el); };
+  const LC = {"Stripe": "#635BFF", "Spotify": "#1ED760", "Figma": "#F24E1E", "Airbnb": "#FF5A5F", "Linear": "#5E6AD2", "N26": "#48AC98", "Revolut": "#191C1F", "Notion": "#000"};
+  const lg = (n) => `<span class="logo" style="background:${LC[n]}"><svg><use href="#lg-${n}" /></svg></span>`;
+
+  // a · chat: your request → the agent types → it lists the roles it applied to
+  document.querySelectorAll('[data-chat]').forEach(box => {
+    const feed = box.querySelector('[data-feed]');
+    const add = (h) => { feed.insertAdjacentHTML('beforeend', h); while (feed.scrollHeight > feed.clientHeight + 2 && feed.children.length > 1) feed.firstElementChild.remove(); };
+    const jc = (n, t, sal) => `<div class="ag-jc">${lg(n)}<span><b>${t}</b><em>${n} · ${sal}</em></span><i>Applied</i></div>`;
+    const JOBS = [['Stripe', 'Product Designer', '€185k'], ['N26', 'Senior Designer', '€160k'], ['Linear', 'Design Engineer', '€210k']];
+    if (reduce) { add('<div class="ag-b ag-me">Product design roles in Berlin, €150k+</div>'); add('<div class="ag-b ag-bot">Found 12. Applied to the best 3:</div>'); JOBS.forEach(j => add(jc(...j))); return; }
+    onScreen(box, async (alive) => { while (alive()) {
+      feed.innerHTML = ''; await wait(500);
+      add('<div class="ag-b ag-me">Product design roles in Berlin, €150k+</div>'); await wait(700);
+      add('<div class="ag-b ag-bot" data-typing><span class="ag-dots"><i></i><i></i><i></i></span></div>'); await wait(1200);
+      feed.querySelector('[data-typing]')?.remove(); add('<div class="ag-b ag-bot">Found 12. Applied to the best 3:</div>'); await wait(500);
+      for (const j of JOBS) { add(jc(...j)); await wait(600); }
+      await wait(2800);
+    } });
+  });
+
+  // b · cluster: the icons drift a little towards the pointer, each by its own depth
+  document.querySelectorAll('[data-gxcl]').forEach(box => {
+    if (reduce) return;
+    const items = [...box.querySelectorAll('.gx-i')], depth = { z0: 6, z1: 14, z2: 22, z3: 30 };
+    const stage = box.closest('.stage'); box.dataset.p = '1';
+    stage.addEventListener('pointermove', e => { const r = stage.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5;
+      items.forEach(it => { const k = depth[[...it.classList].find(c => c in depth)]; it.style.transform = `translate(calc(-50% + ${-dx * k}px), calc(-50% + ${-dy * k}px))`; }); });
+    stage.addEventListener('pointerleave', () => items.forEach(it => it.style.transform = ''));
+  });
+
+  // c · carousel: icons ride an ellipse; the front one is big and sharp, the back ones small and soft
+  document.querySelectorAll('[data-gxring]').forEach(ring => {
+    const items = [...ring.querySelectorAll('.gx-c')], N = items.length;
+    let on = false, loop = false, t0 = performance.now();
+    const place = (t) => { const W = ring.clientWidth, a0 = t / 4200;
+      items.forEach((it, i) => { const a = a0 + i / N * Math.PI * 2, z = Math.cos(a), x = Math.sin(a) * W * .46, y = -z * 64, sc = .5 + (z + 1) * .34;
+        it.style.transform = `translate(${x}px, ${-y}px) scale(${sc})`; it.style.zIndex = Math.round((z + 1) * 50); it.style.opacity = .45 + (z + 1) * .275; it.style.filter = `blur(${Math.max(0, -z) * 1.6}px)`; }); };
+    place(0);
+    if (reduce) return;
+    const step = (now) => { place(now - t0); if (on) requestAnimationFrame(step); else loop = false; };
+    new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on && !loop) { loop = true; requestAnimationFrame(step); } }).observe(ring);
+  });
+
+  // b · the job chips get their ✓ one after another
+  document.querySelectorAll('[data-gxcl]').forEach(box => {
+    const jobs = [...box.querySelectorAll('[data-job]')];
+    if (reduce) { jobs.forEach(j => j.classList.add('ok')); return; }
+    onScreen(box, async (alive) => { while (alive()) { jobs.forEach(j => j.classList.remove('ok')); await wait(900); for (const j of jobs) { j.classList.add('ok'); await wait(900); } await wait(2400); } });
   });
 })();
 </script>

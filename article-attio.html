@@ -280,10 +280,34 @@
   </defs>
 </svg>
 
-<header class="nav"><div class="frame">
-  <a class="brand" href="./"><svg width="22" height="22"><use href="#tau" /></svg> Tau</a>
-  <nav class="links"><a class="ghost" href="blog/">Blog</a><a class="ghost" href="#">Sign in</a><a class="cta" href="onboarding/">Start for free</a></nav>
+<header class="glass-bar" data-dark="false" id="tnav"><div class="tn-in">
+  <a class="tn-brand" href="./" aria-label="Tau home"><svg viewBox="0 0 92 92" width="24" height="24" aria-hidden="true"><defs><linearGradient id="tn-g" gradientUnits="userSpaceOnUse" x1="8" y1="0" x2="84" y2="0"><stop offset="0" stop-color="#2563EB" class="s0" /><stop offset=".52" stop-color="#6D5DFB" class="s1" /><stop offset="1" stop-color="#9333EA" class="s2" /></linearGradient></defs><path d="M8 17H84V30H46V59C46 64 50 68 55 68H59V81H55C43 81 33 71 33 59V30H8Z" fill="url(#tn-g)" /></svg><span>Tau</span></a>
+  <div class="tn-r"><a class="glass-link tn-hide" href="blog/">Blog</a><a class="glass-ghost tn-hide" href="#">Sign in</a><a class="glass-cta" href="onboarding/">Start for free</a></div>
 </div></header>
+<style>
+  #tnav { position: sticky; top: 0; z-index: 50; font-family: Inter, system-ui, sans-serif; letter-spacing: normal; color: #1c1d1f; background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid rgba(15,23,42,.06); box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 8px 24px -18px rgba(15,23,42,.25); transition: background .3s, color .3s; }
+  #tnav .tn-in { max-width: 1280px; margin: 0 auto; height: 60px; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
+  #tnav .tn-brand { display: flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; } #tnav .tn-brand span { font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
+  #tnav .tn-r { display: flex; align-items: center; gap: 8px; }
+  #tnav .tn-r a { display: flex; align-items: center; height: 32px; padding: 0 12px; font-size: 14px; font-weight: 500; line-height: 1; text-decoration: none; border-radius: 10px; transition: background .2s, color .2s; }
+  #tnav .glass-link { color: #6f7277; } #tnav .glass-link:hover { color: #1c1d1f; }
+  #tnav .glass-ghost { color: inherit; border: 1px solid rgba(15,23,42,.1); background: rgba(255,255,255,.4); } #tnav .glass-ghost:hover { background: rgba(255,255,255,.8); }
+  #tnav .glass-cta { background: #1c1d1f; color: #fff; } #tnav .glass-cta:hover { background: #000; }
+  #tnav[data-dark="true"] { color: #fff; background: rgba(17,17,17,.45); border-bottom-color: rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 8px 24px -18px rgba(0,0,0,.6); }
+  #tnav[data-dark="true"] .glass-link { color: rgba(255,255,255,.6); } #tnav[data-dark="true"] .glass-link:hover { color: #fff; }
+  #tnav[data-dark="true"] .glass-ghost { border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.04); }
+  #tnav[data-dark="true"] .glass-cta { background: #fff; color: #1c1d1f; }
+  #tnav[data-dark="true"] .s0 { stop-color: #60A5FA; } #tnav[data-dark="true"] .s1 { stop-color: #A5B4FC; } #tnav[data-dark="true"] .s2 { stop-color: #C084FC; }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { #tnav { background: rgba(255,255,255,.94); } #tnav[data-dark="true"] { background: rgba(17,17,17,.94); } }
+  @media (max-width: 639px) { #tnav .tn-in { padding: 0 20px; } #tnav .tn-hide { display: none; } }
+</style>
+<script>
+  // dark glass while the bar sits over a dark block (same rule as the site's GlassHeader)
+  (() => { const bar = document.getElementById('tnav'); let raf = 0;
+    const dark = () => [...document.querySelectorAll('[data-tone="dark"], .band.dark, .ts.dark, .dark-band')].some(el => { const r = el.getBoundingClientRect(); return r.top <= 30 && r.bottom > 30; });
+    const check = () => { raf = 0; bar.dataset.dark = dark(); };
+    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(check); }, { passive: true }); addEventListener('resize', check); check(); })();
+</script>
 
 <!-- ═══ HERO — from article-hero-minimal.html (title left, the Ink card right) -->
 <section class="mhero"><div class="frame">
