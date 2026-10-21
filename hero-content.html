@@ -25,17 +25,17 @@
     --mono: "JetBrains Mono", ui-monospace, monospace;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; color: var(--ink); font: 400 16px/1.5 Inter, system-ui, sans-serif; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; background: #fff radial-gradient(circle, #dcdee2 1px, transparent 1.2px) 0 0 / 14px 14px; }
+  body { margin: 0; color: var(--ink); font: 400 16px/1.5 Inter, system-ui, sans-serif; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; background: #fff; }
   img { display: block; max-width: 100%; height: auto; }
   a { color: inherit; text-decoration: none; }
-  .frame { position: relative; max-width: 1280px; margin: 0 auto; background: #fff; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .frame { position: relative; max-width: 1280px; margin: 0 auto; background: #fff; }
   .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .top { border-bottom: 1px solid var(--line); }
   .top .frame { display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 28px; }
   .brand { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 17px; }
   .note { font-size: 13px; color: var(--meta); }
-  .label { border-bottom: 1px solid var(--line); }
-  .label .frame { padding: 14px 72px; font: 500 12.5px var(--mono); color: var(--meta); }
+  .label { }
+  .label .frame { padding: 40px 72px 0; font: 500 12.5px var(--mono); color: var(--meta); }
   .label b { color: var(--ink); font-weight: 500; }
 
   .hero { border-bottom: 1px solid var(--line); }
@@ -127,6 +127,19 @@
   footer { padding: 40px 72px; color: var(--meta); font-size: 13px; }
   @media (max-width: 1024px) { .hero .frame { grid-template-columns: 1fr; padding: 40px 24px; gap: 40px; min-height: 0; } .label .frame { padding: 14px 24px; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* 05 — plaque: job rows + one headline, one line, one button */
+.s5 { align-self: center; padding: 28px; border-radius: 22px; background: radial-gradient(120% 100% at 0% 0%, #eef0ff 0%, #f5f2ff 45%, #fbf9ff 100%); border: 1px solid #e6e3fb; }
+.s5 .jl { margin-bottom: 24px; border-radius: 14px; background: #fff; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 24px 44px -26px rgba(40,30,120,.45); }
+.s5 .jr { display: flex; align-items: center; gap: 12px; padding: 12px 14px; font-size: 13.5px; color: var(--ink); }
+.s5 .jr + .jr { border-top: 1px solid #ececee; }
+.s5 .jt { flex: 1; min-width: 0; line-height: 1.25; } .s5 .jt b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .s5 .jt span { font-size: 12.5px; color: #75787e; }
+.s5 .sal { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+.s5 .ok, .s5 .go { flex: none; padding: 3px 8px; border-radius: 7px; font-size: 12px; font-weight: 600; }
+.s5 .ok { background: #e7f6ec; color: #1a7f3c; } .s5 .go { background: #f1efff; color: #5644e6; }
+.s5 h2 { margin: 0; font-size: 26px; line-height: 1.15; letter-spacing: -.03em; font-weight: 600; }
+.s5 p { margin: 8px 0 20px; font-size: 15.5px; color: #4a4c52; }
+@media (max-width: 720px) { .s5 { padding: 16px 16px 22px; } .s5 .ok, .s5 .go { display: none; } }
 </style>
 </head>
 <body>
@@ -200,7 +213,19 @@
   </aside>
 </div></section>
 
-<footer>Tau · hero visuals, take 2 · 19 Oct 2026</footer>
+<!-- ═══ 5 — plaque -->
+<div class="label"><div class="frame"><b>05</b></div></div>
+<section class="hero"><div class="frame">
+  <div><span class="pill"><svg width="13" height="13"><use href="#tau" /></svg> Blog · Resume</span><h1>How to write a resume recruiters <span class="grad-text">actually read</span>.</h1><p class="lead">A recruiter decides in a few seconds. Here’s what their eyes hit first.</p><div class="meta"><span>Tau team</span><span>·</span><span>6 min read</span></div></div>
+  <aside class="s5">
+    <div class="jl"><div class="jr"><span class="logo" style="background:#635BFF"><svg><use href="#lg-Stripe" /></svg></span><span class="jt"><b>Product Designer</b><span>Stripe</span></span><b class="sal">€185k</b><span class="ok">Applied</span></div><div class="jr"><span class="logo" style="background:#1ED760"><svg><use href="#lg-Spotify" /></svg></span><span class="jt"><b>Senior Designer</b><span>Spotify</span></span><b class="sal">€170k</b><span class="ok">Applied</span></div><div class="jr"><span class="logo" style="background:#5E6AD2"><svg><use href="#lg-Linear" /></svg></span><span class="jt"><b>Design Engineer</b><span>Linear</span></span><b class="sal">€210k</b><span class="go">Applying…</span></div></div>
+    <h2>Get the best offers on autopilot</h2>
+    <p>Your agent applies to 20 jobs a day on LinkedIn</p>
+    <a class="lnk" href="onboarding/">Start for free <span class="ar">→</span></a>
+  </aside>
+</div></section>
+
+<footer>Tau · hero visuals, take 2 · 21 Oct 2026</footer>
 
 <script>
 (() => {
